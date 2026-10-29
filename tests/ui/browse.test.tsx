@@ -30,8 +30,55 @@ test('the list shows a skeleton with one polite status while the problems load, 
   assert.match(status.textContent ?? '', /Loading problems/)
   release()
   await rtl.waitFor(() => assert.ok(screen.getByText('37 problems')))
-  assert.equal(screen.getAllByRole('heading', { level: 2 }).length, 8)
-  assert.equal(screen.getAllByRole('link', { name: /Flat tire/ }).length, 1)
+  // The common problems, then the eight categories.
+  assert.equal(screen.getAllByRole('heading', { level: 2 }).length, 9)
+  assert.equal(document.querySelectorAll('a.row-link[href="/fix/flat-tire"]').length, 1)
+  rtl.cleanup()
+})
+
+test('the hero holds the one h1, a sentence of help and the search, in that order', async () => {
+  release()
+  const { screen, rtl } = await mountApp('/')
+  await rtl.waitFor(() => assert.ok(screen.getByText('37 problems')))
+  const hero = document.querySelector('header.hero') as HTMLElement
+  assert.ok(hero, 'the screen opens with the hero band')
+  const parts = [...hero.children].map((child) => child.tagName)
+  assert.deepEqual(parts, ['H1', 'P', 'DIV'])
+  assert.ok(hero.contains(screen.getByRole('searchbox', { name: 'Search problems' })))
+  rtl.cleanup()
+})
+
+test('the common problems are one tap from their answers and give way to the list once a search or category is used', async () => {
+  release()
+  const { screen, rtl } = await mountApp('/')
+  await rtl.waitFor(() => assert.ok(screen.getByText('37 problems')))
+  const chips = [...document.querySelectorAll<HTMLAnchorElement>('a.quick__chip')]
+  assert.equal(chips.length, 6)
+  assert.equal(new Set(chips.map((chip) => chip.getAttribute('href'))).size, 6)
+  for (const chip of chips) assert.match(chip.getAttribute('href') ?? '', /^\/fix\/[a-z-]+$/)
+  rtl.fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'battery' } })
+  await rtl.waitFor(() => assert.equal(document.querySelectorAll('a.quick__chip').length, 0))
+  assert.equal(screen.queryByRole('heading', { level: 2, name: 'Common problems' }), null)
+  rtl.cleanup()
+
+  const filtered = await mountApp('/?category=tires')
+  await rtl.waitFor(() => assert.ok(filtered.screen.getByText('6 problems')))
+  assert.equal(document.querySelectorAll('a.quick__chip').length, 0)
+  filtered.rtl.cleanup()
+})
+
+test('the vehicle box is there while the problems load, and sits under the hero and its search, not above it', async () => {
+  const { screen, rtl } = await mountApp('/')
+  const vehicle = screen.getByRole('textbox', { name: 'Your vehicle' })
+  const hero = document.querySelector('header.hero') as HTMLElement
+  assert.ok(
+    hero.compareDocumentPosition(vehicle) & Node.DOCUMENT_POSITION_FOLLOWING,
+    'the vehicle box follows the hero while loading',
+  )
+  release()
+  await rtl.waitFor(() => assert.ok(screen.getByText('37 problems')))
+  const search = screen.getByRole('searchbox', { name: 'Search problems' })
+  assert.ok(search.compareDocumentPosition(vehicle) & Node.DOCUMENT_POSITION_FOLLOWING, 'and follows the search once it is drawn')
   rtl.cleanup()
 })
 

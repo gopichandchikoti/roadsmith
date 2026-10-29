@@ -35,3 +35,22 @@ export async function realCatalogSource(): Promise<Catalog> {
   const { readJson } = await import('./data')
   return parseCatalog(readJson('src/catalog.model.json'))
 }
+
+/**
+ * Replaces the page's clipboard for one behaviour: it accepts the text, it refuses it (a denied permission) or it does not exist
+ * (a page served without a secure context). Returns the texts a successful copy wrote. Call it after `mountApp`.
+ */
+export function stubClipboard(behaviour: 'works' | 'refuses' | 'missing'): string[] {
+  const written: string[] = []
+  const clipboard =
+    behaviour === 'missing'
+      ? undefined
+      : {
+          writeText: async (text: string): Promise<void> => {
+            if (behaviour === 'refuses') throw new Error('denied')
+            written.push(text)
+          },
+        }
+  Object.defineProperty(window.navigator, 'clipboard', { value: clipboard, configurable: true })
+  return written
+}

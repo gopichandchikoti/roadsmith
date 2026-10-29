@@ -1,4 +1,5 @@
 import { useId } from 'react'
+import '../../components/Panel.css'
 import { content } from '../../content'
 
 /** The standing highway safety reminders, shown on every result. */

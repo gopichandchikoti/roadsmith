@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { after, beforeEach, test } from 'node:test'
-import { mountApp, realCatalogSource } from '../setup/ui'
+import { mountApp, realCatalogSource, stubClipboard } from '../setup/ui'
 
 const { setCatalogSource, resetCatalogCache } = await import('../../src/api')
 
@@ -21,7 +21,8 @@ test('a problem you can fix shows its verdict on the ladder, its steps and its c
   assert.match(current[0]?.textContent ?? '', /Fix it here.*This problem/)
   assert.equal(screen.queryByText('Do not drive this car'), null)
   assert.equal(screen.getByRole('heading', { name: 'Steps to fix it' }).tagName, 'H2')
-  assert.equal(document.querySelectorAll('.steps__item').length, 6)
+  const steps = screen.getByRole('heading', { name: 'Steps to fix it' }).closest('section') as HTMLElement
+  assert.equal(steps.querySelectorAll('ol > li').length, 6)
   assert.ok(screen.getByText('Some experience needed'))
   assert.ok(screen.getByText('30 minutes'))
   assert.ok(screen.getByText(/Pulled over\?/))
@@ -42,7 +43,8 @@ test('a problem that needs help shows the warning first, with one way to find a 
 test('the checklist counts ticks, announces when everything is ready and keeps ticks for this tab', async () => {
   const { screen, rtl } = await mountApp('/fix/flat-tire')
   await rtl.waitFor(() => assert.ok(screen.getByText('0 of 6 ready')))
-  const boxes = screen.getAllByRole('checkbox') as HTMLInputElement[]
+  const tools = screen.getByRole('heading', { name: 'Tools and parts' }).closest('section') as HTMLElement
+  const boxes = rtl.within(tools).getAllByRole('checkbox') as HTMLInputElement[]
   assert.equal(boxes.length, 6)
   rtl.fireEvent.click(boxes[0] as HTMLInputElement)
   assert.ok(screen.getByText('1 of 6 ready'))
@@ -136,6 +138,91 @@ test('every problem in the catalog opens without error and shows its own name', 
     const { screen, rtl } = await mountApp(`/fix/${problem.id}`)
     await rtl.waitFor(() => assert.equal(screen.getByRole('heading', { level: 1 }).textContent, problem.name))
     assert.equal(document.querySelectorAll('main h1').length, 1)
+    rtl.cleanup()
+  }
+})
+
+test('each repair step can be ticked, the next one is marked, and ticks are kept for this tab under their own key', async () => {
+  const { screen, rtl } = await mountApp('/fix/flat-tire')
+  await rtl.waitFor(() => assert.ok(screen.getByText('0 of 6 done')))
+  const panel = screen.getByRole('heading', { name: 'Steps to fix it' }).closest('section') as HTMLElement
+  const items = () => [...panel.querySelectorAll('li')]
+  const boxes = rtl.within(panel).getAllByRole('checkbox') as HTMLInputElement[]
+  assert.equal(boxes.length, 6)
+  assert.equal(items()[0]?.getAttribute('aria-current'), 'step')
+  assert.equal(rtl.within(panel).getAllByText('Next').length, 1)
+
+  rtl.fireEvent.click(boxes[0] as HTMLInputElement)
+  rtl.fireEvent.click(boxes[1] as HTMLInputElement)
+  assert.ok(screen.getByText('2 of 6 done'))
+  assert.equal(items()[2]?.getAttribute('aria-current'), 'step')
+  assert.equal(window.sessionStorage.getItem('roadsmith:steps:flat-tire'), '0,1')
+  assert.equal(window.sessionStorage.getItem('roadsmith:checks:flat-tire'), null, 'the tool ticks are a separate key')
+
+  rtl.fireEvent.click(boxes[4] as HTMLInputElement)
+  assert.equal(items()[2]?.getAttribute('aria-current'), 'step', 'a later tick does not move Next past an undone step')
+
+  for (const index of [2, 3, 5]) rtl.fireEvent.click(boxes[index] as HTMLInputElement)
+  const done = screen.getByText('Every step is done. If the problem is still there, get help.')
+  assert.equal(done.getAttribute('aria-live'), 'polite')
+  assert.equal(panel.querySelectorAll('[aria-current="step"]').length, 0)
+  assert.equal(rtl.within(panel).queryByText('Next'), null)
+  rtl.cleanup()
+
+  const again = await mountApp('/fix/flat-tire', { session: { 'roadsmith:steps:flat-tire': '0,2' } })
+  await rtl.waitFor(() => assert.ok(again.screen.getByText('2 of 6 done')))
+  const reopened = again.screen.getByRole('heading', { name: 'Steps to fix it' }).closest('section') as HTMLElement
+  assert.equal(reopened.querySelectorAll('li')[1]?.getAttribute('aria-current'), 'step')
+  again.rtl.cleanup()
+})
+
+test('corrupt step ticks in storage are ignored', async () => {
+  const { screen, rtl } = await mountApp('/fix/flat-tire', { session: { 'roadsmith:steps:flat-tire': '<b>,99,-1,2,2' } })
+  await rtl.waitFor(() => assert.ok(screen.getByText('1 of 6 done')))
+  rtl.cleanup()
+})
+
+test('a problem that needs a shop or a tow has a summary to read out and copy, and a fixable one does not', async () => {
+  const catalog = await realCatalogSource()
+  const bulge = catalog.problems.find((problem) => problem.id === 'tire-bulge')
+  assert.ok(bulge)
+  const { screen, rtl } = await mountApp('/fix/tire-bulge', { local: { 'roadsmith:vehicle': '2019 Toyota Camry' } })
+  await rtl.waitFor(() => assert.ok(screen.getByRole('heading', { name: 'What to tell them' })))
+  const text = screen.getByRole('textbox', { name: 'Summary to read out' }) as HTMLTextAreaElement
+  assert.equal(text.readOnly, true)
+  assert.equal(text.value, `Vehicle: 2019 Toyota Camry\nProblem: ${bulge.name}\nDetails: ${bulge.summary}`)
+
+  const written = stubClipboard('works')
+  rtl.fireEvent.click(screen.getByRole('button', { name: 'Copy summary' }))
+  await rtl.waitFor(() => assert.ok(screen.getByText('Copied to your clipboard.')))
+  assert.deepEqual(written, [text.value])
+  assert.equal(screen.getByText('Copied to your clipboard.').getAttribute('aria-live'), 'polite')
+  assert.equal(window.localStorage.getItem('roadsmith:vehicle'), '2019 Toyota Camry')
+  assert.equal(window.sessionStorage.length, 0, 'the summary is not stored')
+  rtl.cleanup()
+
+  const limp = await mountApp('/fix/leaking-valve')
+  await rtl.waitFor(() => assert.ok(limp.screen.getByRole('heading', { name: 'What to tell them' })))
+  const noVehicle = limp.screen.getByRole('textbox', { name: 'Summary to read out' }) as HTMLTextAreaElement
+  assert.ok(!/Vehicle:/.test(noVehicle.value), 'a line with nothing to say is left out')
+  limp.rtl.cleanup()
+
+  const fixable = await mountApp('/fix/flat-tire')
+  await rtl.waitFor(() => assert.ok(fixable.screen.getByRole('heading', { name: 'Steps to fix it' })))
+  assert.equal(fixable.screen.queryByRole('heading', { name: 'What to tell them' }), null)
+  fixable.rtl.cleanup()
+})
+
+test('a copy the browser refuses, or cannot do, says so and leaves the text to select', async () => {
+  for (const behaviour of ['refuses', 'missing'] as const) {
+    const { screen, rtl } = await mountApp('/fix/tire-bulge')
+    await rtl.waitFor(() => assert.ok(screen.getByRole('heading', { name: 'What to tell them' })))
+    const written = stubClipboard(behaviour)
+    rtl.fireEvent.click(screen.getByRole('button', { name: 'Copy summary' }))
+    await rtl.waitFor(() => assert.ok(screen.getByText('Could not copy. Select the text and copy it yourself.')))
+    assert.equal(screen.queryByText('Copied to your clipboard.'), null)
+    assert.deepEqual(written, [])
+    assert.ok(screen.getByRole('textbox', { name: 'Summary to read out' }))
     rtl.cleanup()
   }
 })

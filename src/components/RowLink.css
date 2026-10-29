@@ -20,12 +20,12 @@
 
 .row-link:active {
   background: var(--color-paper-3);
-  border-color: var(--color-violet);
+  border-color: var(--color-highlight);
 }
 
 .row-link > svg {
   flex: none;
-  color: var(--color-violet);
+  color: var(--color-highlight);
 }
 
 .row-link__text {

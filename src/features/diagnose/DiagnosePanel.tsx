@@ -1,10 +1,11 @@
+import type { ReactNode } from 'react'
 import type { Catalog } from '../../@types/catalog'
 import { Button, ButtonLink } from '../../components/Button'
 import { ChoiceRow } from '../../components/ChoiceRow'
 import { BackLink } from '../../components/BackLink'
+import { Hero } from '../../components/Hero'
 import { RetryIcon } from '../../components/icons'
 import { ListSkeleton } from '../../components/ListSkeleton'
-import { PageHeading } from '../../components/PageHeading'
 import { ProblemRow } from '../../components/ProblemRow'
 import { StatePanel } from '../../components/StatePanel'
 import { VerdictBadge } from '../../components/VerdictBadge'
@@ -18,19 +19,22 @@ import './DiagnosePanel.css'
 type DiagnosePanelProps = {
   symptom: string | null
   option: number | null
+  /** The optional vehicle box, drawn under the hero of the first question. */
+  vehicleField: ReactNode
 }
 
 const QUESTION_COUNT = 2
 
 /** Help me find it: pick the symptom, answer one more question, then see the most likely cause and the alternatives. */
-export function DiagnosePanel({ symptom, option }: DiagnosePanelProps) {
+export function DiagnosePanel({ symptom, option, vehicleField }: DiagnosePanelProps) {
   const { state, retry } = useCatalog()
   useDocumentTitle(content.diagnose.title)
 
   if (state.status === 'loading') {
     return (
       <div className="diagnose">
-        <PageHeading>{content.diagnose.firstHeading}</PageHeading>
+        <Hero heading={content.diagnose.firstHeading} lede={content.diagnose.lede} />
+        {vehicleField}
         <ListSkeleton />
       </div>
     )
@@ -39,7 +43,8 @@ export function DiagnosePanel({ symptom, option }: DiagnosePanelProps) {
   if (state.status === 'error') {
     return (
       <div className="diagnose">
-        <PageHeading>{content.diagnose.firstHeading}</PageHeading>
+        <Hero heading={content.diagnose.firstHeading} lede={content.diagnose.lede} />
+        {vehicleField}
         <StatePanel
           tone="error"
           title={content.states.error.title}
@@ -55,17 +60,21 @@ export function DiagnosePanel({ symptom, option }: DiagnosePanelProps) {
     )
   }
 
-  return <DiagnoseSteps catalog={state.catalog} symptom={symptom} option={option} />
+  return <DiagnoseSteps catalog={state.catalog} symptom={symptom} option={option} vehicleField={vehicleField} />
 }
 
 type DiagnoseStepsProps = DiagnosePanelProps & { catalog: Catalog }
 
-function DiagnoseSteps({ catalog, symptom, option }: DiagnoseStepsProps) {
+function DiagnoseSteps({ catalog, symptom, option, vehicleField }: DiagnoseStepsProps) {
   if (symptom === null) {
     return (
       <div className="diagnose">
-        <PageHeading>{content.diagnose.firstHeading}</PageHeading>
-        <p className="diagnose__step">{fill(content.diagnose.step, { current: 1, total: QUESTION_COUNT })}</p>
+        <Hero
+          heading={content.diagnose.firstHeading}
+          lede={content.diagnose.lede}
+          step={{ current: 1, total: QUESTION_COUNT, label: fill(content.diagnose.step, { current: 1, total: QUESTION_COUNT }) }}
+        />
+        {vehicleField}
         <ul className="diagnose__list">
           {catalog.triage.map((question) => (
             <ChoiceRow key={question.id} to={hrefs.diagnose(question.id)} label={question.label} />
@@ -80,7 +89,7 @@ function DiagnoseSteps({ catalog, symptom, option }: DiagnoseStepsProps) {
   if (!question || (option !== null && !chosen)) {
     return (
       <div className="diagnose">
-        <PageHeading>{content.diagnose.unknown.title}</PageHeading>
+        <Hero heading={content.diagnose.unknown.title} />
         <StatePanel tone="notice" action={<ButtonLink to={hrefs.diagnose()}>{content.diagnose.unknown.action}</ButtonLink>}>
           {content.diagnose.unknown.body}
         </StatePanel>
@@ -92,8 +101,10 @@ function DiagnoseSteps({ catalog, symptom, option }: DiagnoseStepsProps) {
     return (
       <div className="diagnose">
         <BackLink fallbackHref={hrefs.diagnose()}>{content.diagnose.back}</BackLink>
-        <PageHeading>{question.question}</PageHeading>
-        <p className="diagnose__step">{fill(content.diagnose.step, { current: 2, total: QUESTION_COUNT })}</p>
+        <Hero
+          heading={question.question}
+          step={{ current: 2, total: QUESTION_COUNT, label: fill(content.diagnose.step, { current: 2, total: QUESTION_COUNT }) }}
+        />
         <ul className="diagnose__list">
           {question.options.map((item, index) => (
             <ChoiceRow key={item.label} to={hrefs.diagnose(question.id, index)} label={item.label} />
@@ -111,7 +122,7 @@ function DiagnoseSteps({ catalog, symptom, option }: DiagnoseStepsProps) {
   return (
     <div className="diagnose">
       <BackLink fallbackHref={hrefs.diagnose(question.id)}>{content.diagnose.back}</BackLink>
-      <PageHeading>{content.diagnose.likelyHeading}</PageHeading>
+      <Hero heading={content.diagnose.likelyHeading} />
       <section className="likely" aria-labelledby="likely-name">
         <h2 id="likely-name" className="likely__name">
           {top.name}

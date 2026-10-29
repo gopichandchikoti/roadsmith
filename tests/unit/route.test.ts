@@ -8,8 +8,17 @@ test('the known addresses parse to their screens', () => {
   assert.deepEqual(parseRoute('/diagnose/dash-light'), { name: 'diagnose', symptom: 'dash-light', option: null })
   assert.deepEqual(parseRoute('/diagnose/dash-light/3'), { name: 'diagnose', symptom: 'dash-light', option: 3 })
   assert.deepEqual(parseRoute('/fix/flat-tire'), { name: 'fix', id: 'flat-tire' })
+  assert.deepEqual(parseRoute('/help'), { name: 'help' })
+  assert.equal(hrefs.help, '/help')
   assert.deepEqual(parseRoute('/privacy'), { name: 'privacy' })
   assert.deepEqual(parseRoute('/terms'), { name: 'terms' })
+})
+
+test('the help address takes no extra segments', () => {
+  assert.deepEqual(parseRoute('/help/'), { name: 'help' })
+  for (const address of ['/help/now', '/help/../privacy', '/HELP', '/helpme']) {
+    assert.deepEqual(parseRoute(address), { name: 'notFound' }, address)
+  }
 })
 
 test('a trailing or doubled slash does not change the screen', () => {

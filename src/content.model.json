@@ -14,6 +14,7 @@
   "skipLink": "Skip to the content",
   "shell": {
     "hazard": "Pulled over? Turn on your hazard lights and stay well clear of traffic.",
+    "helpLink": "Get help now",
     "footer": "Roadsmith gives general guidance for common car problems. It cannot see your car. If anything feels unsafe, treat it as a tow.",
     "footerNavLabel": "About this service",
     "privacy": "Privacy",
@@ -29,7 +30,7 @@
   "vehicle": {
     "label": "Your vehicle",
     "placeholder": "For example, 2019 Toyota Camry",
-    "hint": "Optional. Used to search for tutorials and kept only in this browser.",
+    "hint": "Optional. Stays in this browser.",
     "clear": "Clear vehicle"
   },
   "modes": {
@@ -40,6 +41,18 @@
   "browse": {
     "title": "Find the problem",
     "heading": "What is going wrong?",
+    "lede": "Search for the problem or pick a common one. You get a plain answer and what to do.",
+    "quickPicks": {
+      "heading": "Common problems",
+      "ids": [
+        "flat-tire",
+        "dead-battery",
+        "out-of-fuel",
+        "locked-out",
+        "engine-overheating",
+        "check-engine-steady"
+      ]
+    },
     "searchLabel": "Search problems",
     "searchPlaceholder": "Try flat tire, battery or smoke",
     "clearSearch": "Clear search",
@@ -59,6 +72,7 @@
   "diagnose": {
     "title": "Help me find it",
     "firstHeading": "What are you noticing?",
+    "lede": "Two questions, then the most likely cause and what to do about it.",
     "step": "Question {current} of {total}",
     "back": "Back",
     "likelyHeading": "Most likely",
@@ -105,6 +119,9 @@
     "toolsHeading": "Tools and parts",
     "toolsProgress": "{done} of {total} ready",
     "toolsDone": "Everything is ready.",
+    "stepsProgress": "{done} of {total} done",
+    "stepsDone": "Every step is done. If the problem is still there, get help.",
+    "stepNext": "Next",
     "stepsHeading": {
       "fix": "Steps to fix it",
       "limp": "Steps to get going",

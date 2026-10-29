@@ -11,20 +11,21 @@
   line-height: 1.4;
 }
 
+/* The weight of the badge rises with the seriousness: a hairline, a heavy edge, a solid plate. Words and an icon say it too. */
 .verdict-badge[data-verdict="fix"] {
-  border-color: var(--color-violet);
-  background: var(--color-violet-tint);
+  border-color: var(--color-rule-strong);
+  background: var(--color-paper-3);
   color: var(--color-ink);
 }
 
 .verdict-badge[data-verdict="limp"] {
-  border-color: var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   background: var(--color-signal-tint);
   color: var(--color-ink);
 }
 
 .verdict-badge[data-verdict="help"] {
-  border-color: var(--color-accent-ink);
+  border-color: var(--color-accent);
   background: var(--color-accent);
   color: var(--color-accent-ink);
 }

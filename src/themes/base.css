@@ -44,13 +44,14 @@ body {
   font-synthesis: none;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  caret-color: var(--color-accent);
+  caret-color: var(--color-highlight);
   padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
 }
 
+/* Selected text flips the page colours, so it reads on yellow and on black alike. */
 ::selection {
-  background: color-mix(in oklab, var(--color-accent) 40%, transparent);
-  color: var(--color-ink);
+  background: var(--color-highlight);
+  color: var(--color-paper);
 }
 
 :focus-visible {
@@ -58,9 +59,10 @@ body {
   outline-offset: 2px;
 }
 
+/* A link is underlined in every state, so it never depends on colour alone (on the day page its colour is the text colour). */
 a {
-  color: var(--color-violet);
-  text-decoration-thickness: 1px;
+  color: var(--color-highlight);
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.18em;
 }
 
@@ -141,7 +143,7 @@ svg {
 .noscript {
   margin: var(--space-lg) var(--gutter);
   padding: var(--space-md);
-  border: var(--rule-hair) solid var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   border-radius: var(--radius-control);
   background: var(--color-signal-tint);
 }

@@ -2,13 +2,19 @@
   "updatedLabel": "Last updated",
   "privacy": {
     "title": "Privacy",
-    "updated": "28 October 2026",
+    "updated": "29 October 2026",
     "sections": [
       {
         "heading": "What Roadsmith stores",
         "paragraphs": [
-          "Roadsmith has no accounts. It keeps three things, all in your own browser: the vehicle text you type, your color theme choice, and the tools you tick off on a checklist.",
-          "The vehicle and the theme stay until you clear your browser data or use the Clear vehicle button. Checklist ticks last until you close the tab. None of it is sent to the Roadsmith server."
+          "Roadsmith has no accounts. It keeps three things, all in your own browser: the vehicle text you type, your color theme choice, and the boxes you tick on its checklists (tools, repair steps and safety steps).",
+          "The vehicle and the theme stay until you clear your browser data or use the Clear vehicle button. Ticks last until you close the tab. None of it is sent to the Roadsmith server."
+        ]
+      },
+      {
+        "heading": "The summary on the Help page",
+        "paragraphs": [
+          "The Help page builds a short summary from your vehicle text and a few words you type about what happened. It exists only on that page and is not stored. If you press Copy summary, the text goes to your device clipboard and nowhere else."
         ]
       },
       {

@@ -18,6 +18,13 @@ export function normalizeQuery(input: string): string {
   return collapse(input.replace(QUERY_DISALLOWED, ' ')).slice(0, MAX_QUERY_LENGTH).trim()
 }
 
+export const MAX_NOTE_LENGTH = 120
+
+/** Cleans the few words typed about what happened. They are shown back and copied from this screen, never stored or sent. */
+export function normalizeNote(input: string): string {
+  return collapse(input.replace(QUERY_DISALLOWED, ' ')).slice(0, MAX_NOTE_LENGTH).trim()
+}
+
 export const THEME_CHOICES = ['system', 'light', 'dark'] as const
 export type ThemeChoice = (typeof THEME_CHOICES)[number]
 

@@ -9,6 +9,7 @@ import { AppShell } from './templates/AppShell'
 // Only the first screen is in the main file. The others are their own files, fetched when needed and prefetched when idle
 // (see routes/prefetch), so the first load stays small on a weak signal.
 const FixPage = lazy(() => import('./pages/FixPage').then((module) => ({ default: module.FixPage })))
+const HelpPage = lazy(() => import('./pages/HelpPage').then((module) => ({ default: module.HelpPage })))
 const LegalPage = lazy(() => import('./pages/LegalPage').then((module) => ({ default: module.LegalPage })))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })))
 
@@ -19,6 +20,8 @@ function renderRoute(route: Route): ReactNode {
       return <HomePage route={route} />
     case 'fix':
       return <FixPage id={route.id} />
+    case 'help':
+      return <HelpPage />
     case 'privacy':
       return <LegalPage document="privacy" />
     case 'terms':

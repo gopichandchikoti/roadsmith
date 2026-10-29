@@ -1,0 +1,35 @@
+{
+  "title": "Get help now",
+  "heading": "Get help now",
+  "lede": "Work down the page in order. Your ticks stay in this tab and nowhere else.",
+  "safety": {
+    "heading": "Make the car safe",
+    "progress": "{done} of {total} done",
+    "done": "That is as safe as you can make it. Now get help."
+  },
+  "emergency": "If anyone is hurt or you are in danger, call your local emergency number first (911 in the US and Canada, 112 in the EU).",
+  "call": {
+    "heading": "Find help nearby",
+    "locationNote": "Note where you are before you call: a road name, a mile marker or the nearest exit."
+  },
+  "sheet": {
+    "heading": "What to tell them",
+    "body": "Read this out when you call a tow operator or a mechanic.",
+    "problemLabel": "What happened",
+    "problemPlaceholder": "For example, flat tire or will not start",
+    "problemClear": "Clear what happened",
+    "textLabel": "Summary to read out",
+    "vehicleLine": "Vehicle: {value}",
+    "problemLine": "Problem: {value}",
+    "detailsLine": "Details: {value}",
+    "empty": "Add your vehicle and say what happened, and your summary appears here.",
+    "copy": "Copy summary",
+    "copied": "Copied to your clipboard.",
+    "copyFailed": "Could not copy. Select the text and copy it yourself."
+  },
+  "notSure": {
+    "heading": "Not sure what is wrong?",
+    "body": "Answer two questions and get the most likely cause.",
+    "action": "Help me find it"
+  }
+}

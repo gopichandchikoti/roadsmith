@@ -10,12 +10,12 @@
 }
 
 .state-panel[data-tone="error"] {
-  border-color: var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   background: var(--color-signal-tint);
 }
 
 .state-panel > svg {
-  color: var(--color-signal-edge);
+  color: var(--color-highlight);
 }
 
 .state-panel__text {

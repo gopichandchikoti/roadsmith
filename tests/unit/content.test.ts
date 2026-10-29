@@ -5,7 +5,8 @@ import { allStrings, at, readJson } from '../setup/data'
 
 const model = readJson('src/content.model.json')
 const legal = readJson('src/legal.model.json')
-const everyString = [...allStrings(model), ...allStrings(legal)]
+const help = readJson('src/help.model.json')
+const everyString = [...allStrings(model), ...allStrings(legal), ...allStrings(help)]
 
 test('every visible string follows the voice rules: no dashes, middle dots, arrows, emoji, markup or addresses', () => {
   assert.ok(everyString.length > 100)
@@ -36,6 +37,28 @@ test('the legal pages say what the code does, in the places a test elsewhere pro
   const terms = allStrings(at(legal, 'terms')).join(' ')
   assert.match(terms, /not a mechanic/i)
   assert.match(terms, /emergency number/i)
+})
+
+test('every common problem on the home screen is a real problem, listed once', () => {
+  const ids = at(model, 'browse', 'quickPicks', 'ids')
+  assert.ok(Array.isArray(ids) && ids.every((id) => typeof id === 'string'))
+  assert.equal(new Set(ids).size, ids.length, 'a common problem is listed twice')
+  assert.ok(ids.length >= 4 && ids.length <= 8, 'a short row, not a second list')
+  const problems = at(readJson('src/catalog.model.json'), 'problems')
+  assert.ok(Array.isArray(problems) && problems.length > 30)
+  const known = new Set(problems.map((problem) => at(problem, 'id')))
+  for (const id of ids) assert.ok(known.has(id), `${id} is not a problem id`)
+})
+
+test('the Help copy is its own file, so the first load carries none of it', () => {
+  assert.equal(at(model, 'help'), undefined, 'the Help copy is back in the main content file')
+  for (const key of ['title', 'heading', 'lede', 'safety', 'emergency', 'call', 'sheet', 'notSure']) {
+    assert.ok(at(help, key) !== undefined, `help.${key} is missing`)
+  }
+  assert.match(String(at(help, 'emergency')), /emergency number/i)
+  for (const key of ['vehicleLine', 'problemLine', 'detailsLine']) {
+    assert.match(String(at(help, 'sheet', key)), /\{value\}/, `${key} has no value placeholder`)
+  }
 })
 
 test('placeholders are filled, and a missing value is left visible rather than hidden', () => {

@@ -1,9 +1,9 @@
-import { useId, useState } from 'react'
+import { type ReactNode, useId, useState } from 'react'
 import { Button } from '../../components/Button'
 import { Icon } from '../../components/Icon'
+import { Hero } from '../../components/Hero'
 import { ForwardIcon, OfflineIcon, RetryIcon, SearchIcon } from '../../components/icons'
 import { ListSkeleton } from '../../components/ListSkeleton'
-import { PageHeading } from '../../components/PageHeading'
 import { ProblemRow } from '../../components/ProblemRow'
 import { StatePanel } from '../../components/StatePanel'
 import { TextField } from '../../components/TextField'
@@ -15,15 +15,18 @@ import { useRouter } from '../../routes/router-context'
 import { fill } from '../../utils/format'
 import { searchProblems } from '../../utils/search'
 import { MAX_QUERY_LENGTH, normalizeQuery } from '../../validators/text'
+import { QuickPicks } from './QuickPicks'
 import './BrowsePanel.css'
 
 type BrowsePanelProps = {
   query: string
   category: string | null
+  /** The optional vehicle box, drawn under the hero. */
+  vehicleField: ReactNode
 }
 
 /** Find a known problem: type a few words, narrow by category, pick one. The search and category live in the address. */
-export function BrowsePanel({ query, category }: BrowsePanelProps) {
+export function BrowsePanel({ query, category, vehicleField }: BrowsePanelProps) {
   const { navigate } = useRouter()
   const { state, retry } = useCatalog()
   // What the driver has typed, so a trailing space survives. If Back or Forward changes the address, the address wins.
@@ -38,7 +41,8 @@ export function BrowsePanel({ query, category }: BrowsePanelProps) {
   if (state.status === 'loading') {
     return (
       <div className="browse">
-        <PageHeading>{content.browse.heading}</PageHeading>
+        <Hero heading={content.browse.heading} lede={content.browse.lede} />
+        {vehicleField}
         <ListSkeleton />
       </div>
     )
@@ -48,7 +52,8 @@ export function BrowsePanel({ query, category }: BrowsePanelProps) {
     const offline = typeof navigator !== 'undefined' && navigator.onLine === false
     return (
       <div className="browse">
-        <PageHeading>{content.browse.heading}</PageHeading>
+        <Hero heading={content.browse.heading} lede={content.browse.lede} />
+        {vehicleField}
         <StatePanel
           tone="error"
           icon={offline ? OfflineIcon : undefined}
@@ -72,12 +77,14 @@ export function BrowsePanel({ query, category }: BrowsePanelProps) {
     .map((item) => ({ category: item, problems: results.filter((problem) => problem.category === item.id) }))
     .filter((group) => group.problems.length > 0)
   const count = fill(results.length === 1 ? content.browse.count.one : content.browse.count.other, { count: results.length })
+  const quickPicks = content.browse.quickPicks.ids.flatMap((id) => problems.find((problem) => problem.id === id) ?? [])
+  const unfiltered = query === '' && activeCategory === null
 
   return (
     <div className="browse">
-      <PageHeading>{content.browse.heading}</PageHeading>
-      <div className="browse__controls">
+      <Hero heading={content.browse.heading} lede={content.browse.lede}>
         <TextField
+          tone="band"
           type="search"
           label={content.browse.searchLabel}
           hideLabel
@@ -95,6 +102,10 @@ export function BrowsePanel({ query, category }: BrowsePanelProps) {
             go('', activeCategory)
           }}
         />
+      </Hero>
+      {vehicleField}
+      {unfiltered ? <QuickPicks problems={quickPicks} /> : null}
+      <div className="browse__controls">
         <div className="field">
           <label htmlFor={categoryId} className="field__label">
             {content.browse.categoryLabel}

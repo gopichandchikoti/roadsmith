@@ -61,7 +61,7 @@ test('a catalog already loaded is drawn at once on the next screen, with no seco
   })
   const { screen, rtl } = await mountApp('/')
   await rtl.waitFor(() => assert.ok(screen.getByText('37 problems')))
-  rtl.fireEvent.click(screen.getByRole('link', { name: /Flat tire/ }))
+  rtl.fireEvent.click(document.querySelector('a.row-link[href="/fix/flat-tire"]') as HTMLAnchorElement)
   assert.ok(await screen.findByRole('heading', { level: 1, name: 'Flat tire' }))
   assert.equal(screen.queryByText('Loading problems'), null, 'no loading state once the screen is drawn')
   assert.equal(calls, 1, 'the catalog was fetched once for both screens')

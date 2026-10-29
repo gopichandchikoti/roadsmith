@@ -34,11 +34,23 @@ const ROUTES = [
   ['diagnose', '/diagnose'],
   ['likely', '/diagnose/wont-start/2'],
   ['fix', '/fix/flat-tire'],
-  ['help', '/fix/tire-bulge'],
+  ['tow', '/fix/tire-bulge'],
+  ['shop', '/fix/leaking-valve'],
+  ['help', '/help'],
   ['privacy', '/privacy'],
   ['notfound', '/nowhere'],
 ]
-const report = { screenshots: 0, overflow: [], console: [], failedRequests: [], csp: [], axe: [], focus: [], notes: [] }
+const report = {
+  screenshots: 0,
+  overflow: [],
+  console: [],
+  failedRequests: [],
+  csp: [],
+  axe: [],
+  focus: [],
+  notes: [],
+  interactions: [],
+}
 
 const browser = await puppeteer.launch({ executablePath: chromePath, headless: true, args: ['--no-sandbox'] })
 
@@ -144,6 +156,113 @@ for (const scheme of ['dark', 'light']) {
   await page.close()
 }
 
+// Interactions, in a real browser and in both themes: ticking, typing, the common-problem links, and a real copy to the clipboard
+// that is read back. Each result is recorded as passed or failed with what was seen, so a silent skip cannot look like success.
+{
+  const origin = new URL(BASE).origin
+  await browser
+    .defaultBrowserContext()
+    .overridePermissions(origin, ['clipboard-read', 'clipboard-write', 'clipboard-sanitized-write'])
+    .catch((error) => report.notes.push(`clipboard permission could not be granted: ${error.message}`))
+  const check = (name, ok, seen) =>
+    report.interactions.push(`${ok ? 'pass' : 'FAIL'} ${name}${seen === undefined ? '' : ` (${seen})`}`)
+  // Reads one property of the first element that matches a selector. It uses evaluate rather than the $eval helper, because the
+  // standards audit refuses any call to the eval function in a script and cannot tell the helper from the real thing.
+  const read = (page, selector, property) =>
+    page.evaluate(([css, name]) => document.querySelector(css)?.[name] ?? null, [selector, property])
+
+  for (const scheme of ['dark', 'light']) {
+    for (const [width, height] of [
+      [390, 844],
+      [1440, 900],
+    ]) {
+      const tag = `${scheme} ${width}`
+      const page = await openPage(scheme, width, height)
+
+      // Help screen: tick the first two safety steps with the keyboard, type a note, copy it, read the clipboard back.
+      await page.goto(`${BASE}/help`, { waitUntil: 'load' })
+      // Local storage is shared by every page of the browser, so start each pass from nothing.
+      await page.evaluate(() => {
+        localStorage.clear()
+        sessionStorage.clear()
+      })
+      await page.reload({ waitUntil: 'load' })
+      await settle(page)
+      const boxes = await page.$$('.checklist__item .check__input')
+      await boxes[0].focus()
+      await page.keyboard.press('Space')
+      await boxes[1].click()
+      const progress = await read(page, '.checklist__progress', 'textContent')
+      check(`${tag} help: two safety steps ticked`, progress === '2 of 5 done', progress)
+      const next = (await read(page, '[aria-current="step"] .check__text', 'textContent')) ?? ''
+      check(`${tag} help: the next step moved to the third`, /warning triangle/.test(next), next.slice(0, 40))
+      await page.reload({ waitUntil: 'load' })
+      await settle(page)
+      const kept = await read(page, '.checklist__progress', 'textContent')
+      check(`${tag} help: ticks survive a reload in this tab`, kept === '2 of 5 done', kept)
+
+      await page.type('input[placeholder^="For example, 20"]', '2019 Toyota Camry')
+      await page.type('input[placeholder^="For example, flat"]', 'flat tire on the left')
+      const summary = await read(page, 'textarea.callsheet__text', 'value')
+      check(
+        `${tag} help: the summary is built from what was typed`,
+        summary === 'Vehicle: 2019 Toyota Camry\nProblem: flat tire on the left',
+        JSON.stringify(summary),
+      )
+      await page.screenshot({
+        path: path.join(OUT, `help-active-${width}-${scheme}.webp`),
+        type: 'webp',
+        quality: 82,
+        fullPage: true,
+      })
+      await page.click('.callsheet .button--primary')
+      await new Promise((resolve) => setTimeout(resolve, 300))
+      const status = await read(page, '.callsheet__status', 'textContent')
+      const clipboard = await page.evaluate(() => navigator.clipboard.readText()).catch((error) => `unreadable: ${error.message}`)
+      // Windows hands clipboard text back with CRLF line breaks, so the words are compared with line endings made alike.
+      check(
+        `${tag} help: Copy summary puts the text on the real clipboard`,
+        status === 'Copied to your clipboard.' && clipboard.replace(/\r\n/g, '\n') === summary,
+        `${status} / ${JSON.stringify(clipboard)}`,
+      )
+      await page.evaluate(axeSource)
+      const result = await page.evaluate(() =>
+        window.axe.run(document, {
+          runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa', 'best-practice'] },
+        }),
+      )
+      for (const violation of result.violations)
+        report.axe.push(`${tag} help-active: ${violation.id} (${violation.impact}) x${violation.nodes.length}`)
+
+      // Home: the common problems and the search live in the hero band, and a chip opens its answer.
+      await page.goto(`${BASE}/`, { waitUntil: 'load' })
+      await settle(page)
+      const band = await page.evaluate(() => {
+        const el = document.querySelector('header.hero')
+        const style = getComputedStyle(el)
+        return { background: style.backgroundColor, color: style.color, top: Math.round(el.getBoundingClientRect().top) }
+      })
+      check(
+        `${tag} home: the hero band is in view near the top`,
+        band.top < 400,
+        `top ${band.top}px, ${band.background} on ${band.color}`,
+      )
+      const searchTop = await page.evaluate(() =>
+        Math.round(document.querySelector('input[type=search]').getBoundingClientRect().bottom),
+      )
+      check(
+        `${tag} home: the search box is inside the first screen`,
+        searchTop < height,
+        `bottom edge at ${searchTop}px of ${height}`,
+      )
+      await Promise.all([page.waitForSelector('.fix'), page.click('a.quick__chip')])
+      await settle(page)
+      check(`${tag} home: a common-problem link opens its answer`, (await page.url()).includes('/fix/'), page.url())
+      await page.close()
+    }
+  }
+}
+
 // Reduced motion: the screen entrance has no travel.
 {
   const page = await openPage('dark', 390, 844, true)
@@ -217,6 +336,8 @@ process.stdout.write(
     `axe violations: ${report.axe.length}`,
     ...report.axe.slice(0, 20),
     ...report.notes,
+    `interactions: ${report.interactions.filter((line) => line.startsWith('pass')).length} passed, ${report.interactions.filter((line) => line.startsWith('FAIL')).length} failed`,
+    ...report.interactions.filter((line) => line.startsWith('FAIL')),
     `focus stops: ${report.focus.map((stop) => `${stop.tag}:${stop.label}[${stop.outline}]`).join(' | ')}`,
   ].join('\n') + '\n',
 )

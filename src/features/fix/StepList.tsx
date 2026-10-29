@@ -1,29 +1,29 @@
 import { useId } from 'react'
 import type { Verdict } from '../../@types/catalog'
+import { TickList } from '../../components/TickList'
 import { content } from '../../content'
 import './StepList.css'
 
 type StepListProps = {
+  problemId: string
   verdict: Verdict
   steps: readonly string[]
 }
 
-/** The steps, in order. For a problem that needs help the heading says these are for while the driver waits. */
-export function StepList({ verdict, steps }: StepListProps) {
-  const headingId = useId()
+/**
+ * The steps, in order, each one tickable, with the next one marked. For a problem that needs help the heading says these are for
+ * while the driver waits.
+ */
+export function StepList({ problemId, verdict, steps }: StepListProps) {
   return (
-    <section className="panel" aria-labelledby={headingId}>
-      <h2 id={headingId} className="panel__title">
-        {content.fix.stepsHeading[verdict]}
-      </h2>
-      <ol className="steps">
-        {steps.map((step) => (
-          <li key={step} className="steps__item">
-            {step}
-          </li>
-        ))}
-      </ol>
-    </section>
+    <TickList
+      numbered
+      heading={content.fix.stepsHeading[verdict]}
+      items={steps}
+      storageKey={`roadsmith:steps:${problemId}`}
+      progressTemplate={content.fix.stepsProgress}
+      doneMessage={content.fix.stepsDone}
+    />
   )
 }
 

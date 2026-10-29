@@ -2,11 +2,14 @@
 
 Roadside fix finder. A driver who has stopped with a car problem names it, or answers two questions about a symptom, and gets a
 plain verdict: fix it here, drive carefully to a shop, or get help without driving. Each result lists the tools and parts to
-have ready, short steps, a video search for the driver's vehicle and a map search for help nearby.
+have ready, short steps to tick off, a video search for the driver's vehicle and a map search for help nearby. A Help page, one
+tap from every screen, walks through making the car safe, opens a map search for a tow or a mechanic and builds the few lines to
+read out on the phone, with a button to copy them.
 
-It is a web app that works from a phone to a wide desktop screen, in a night theme and a day theme, in yellow, black and purple.
+It is a web app that works from a phone to a wide desktop screen. It is two colours, signal yellow and black: the night theme is a
+black page with a yellow band, and the day theme is a yellow page with a black band.
 There are no accounts, no database, no uploads and no analytics. The driver's vehicle text, theme and checklist ticks stay in
-their own browser.
+their own browser, and the Help page's summary is never stored or sent.
 
 ## Run it
 
@@ -14,7 +17,7 @@ Requirements: Node.js 22.5 or newer and pnpm 11.
 
 ```
 pnpm install
-pnpm dev          # client on http://localhost:4621, server on http://localhost:4620
+pnpm dev          # open http://localhost:4621 (the client; the server on 4620 only serves a built copy)
 ```
 
 For a production-style run:

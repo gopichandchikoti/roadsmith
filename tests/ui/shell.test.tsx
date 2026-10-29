@@ -13,6 +13,7 @@ const ROUTES = [
   '/diagnose/noise',
   '/diagnose/noise/0',
   '/fix/flat-tire',
+  '/help',
   '/privacy',
   '/terms',
   '/nowhere',
@@ -41,7 +42,8 @@ test('the Privacy and Terms pages show every section of their text', async () =>
   const { screen, rtl } = await mountApp('/privacy')
   assert.ok(await screen.findByRole('heading', { level: 1, name: 'Privacy' }))
   assert.ok(screen.getByRole('heading', { level: 2, name: 'What Roadsmith stores' }))
-  assert.ok(screen.getByText(/28 October 2026/))
+  assert.ok(screen.getByText(/29 October 2026/))
+  assert.ok(screen.getByRole('heading', { level: 2, name: 'The summary on the Help page' }))
   assert.equal(document.title, 'Privacy | Roadsmith')
   rtl.cleanup()
   const terms = await mountApp('/terms')
@@ -110,7 +112,7 @@ test('the vehicle box stores a cleaned vehicle, offers to clear it, and clearing
   rtl.fireEvent.click(screen.getByRole('button', { name: 'Clear vehicle' }))
   assert.equal(box.value, '')
   assert.equal(window.localStorage.getItem('roadsmith:vehicle'), null)
-  assert.ok(screen.getByText(/kept only in this browser/))
+  assert.ok(screen.getByText(/Stays in this browser/))
   rtl.cleanup()
 })
 

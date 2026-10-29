@@ -1,7 +1,8 @@
 # Security validation
 
-Evidence for the controls in `AGENTS.md` Section 3 as they apply to Roadsmith. Dated 2026-10-28, on the first build, before any
-deployment. It states what was run and what happened, not that the app "is secure".
+Evidence for the controls in `AGENTS.md` Section 3 as they apply to Roadsmith. First dated 2026-10-28 on the first build, updated
+2026-10-29 for the yellow and black redesign, the Help screen and tickable steps, before any deployment. It states what was run and
+what happened, not that the app "is secure".
 
 ## Method
 
@@ -22,12 +23,12 @@ deployment. It states what was run and what happened, not that the app "is secur
 | Typecheck (`tsc -b`, strict, tests included), oxlint with warnings denied, Biome format | clean |
 | `pnpm test:security` | 43 tests, 43 pass |
 | `pnpm test:server` | 11 tests, 11 pass |
-| `pnpm test:unit`, `pnpm test:ui` | 58 and 39 tests, all pass |
+| `pnpm test:unit`, `pnpm test:ui` | 64 and 54 tests, all pass |
 | `pnpm test:build` | 27 tests, all pass (12 on the built output, 15 planted-fault controls for the audit script) |
-| `pnpm audit:standards --live` against the running production server | 0 errors, 0 notices |
+| `pnpm audit:standards --live` against the running production server | 0 errors, 0 warnings, 0 notices |
 | `pnpm audit --prod` | no known vulnerabilities (6 production dependencies) |
-| Mutation check | 21 of 21 controls fail their test when removed |
-| Browser run (Chrome, 80 page states) | 0 content security policy violations, 0 console errors or warnings, 0 failed requests |
+| Mutation check | 38 of 38 controls fail their test when removed (21 from the first build, re-run on 2026-10-29, and 17 new) |
+| Browser run (Chrome, 100 page states, 32 interaction checks) | 0 content security policy violations, 0 console errors or warnings, 0 failed requests, 0 axe violations |
 
 ## The three audit prompts, applied
 
@@ -76,10 +77,44 @@ compared) and the full suite was run again and passed.
 | Outbound links open with no opener or referrer | ui: every link that leaves the app |
 | Loading announced politely (UI-13) | ui: a skeleton with one polite status |
 | Focus moves to the new heading (UI-31) | ui: following a link moves focus to the new heading |
+| **Added 2026-10-29:** a refused copy is never shown as a success (PRC-11) | ui: a refused or missing clipboard is reported |
+| The copy message belongs to the text that was copied | ui: copying writes the summary once and a changed summary clears the message |
+| The note typed on the Help screen is cleaned (SEC-06) | unit: the note is cleaned of control characters and brackets, collapsed and capped |
+| The note is cleaned before it reaches the summary (SEC-06) | ui: the summary is built from the vehicle and what the driver types, cleaned |
+| The Help screen holds no link to itself | ui: the Help screen leads with the emergency line and holds no link to itself |
+| The help address takes no extra segments (SEC-06) | unit: the help address takes no extra segments |
+| Repair-step ticks have their own storage key | ui: each repair step can be ticked and kept under its own key |
+| Ticks are kept for the tab | ui: the safety list can be ticked, is kept for this tab and announces when done |
+| Stored ticks are read back through the validator, not trusted (SEC-06) | ui: corrupt step ticks in storage are ignored |
+| The next step is marked | ui: each repair step can be ticked and the next one is marked |
+| Common problems give way to the list once filtered | ui: the common problems give way to the list |
+| The vehicle box survives a loading catalog | ui: the vehicle box is there while the problems load |
+| A summary panel only where a shop or a tow is needed | ui: a problem that needs a shop or a tow has a summary |
+| A summary line with nothing to say is left out | ui: the same test, no empty "Vehicle:" line |
+| Every common problem is a real problem | unit: every common problem on the home screen is a real problem |
+| The palette is yellow and black only | unit: the palette is yellow and black only |
+| Text contrast is measured (UI-30) | unit: every colour pair the design uses meets WCAG 2.2 AA |
 
 Controls that are properties of absent code (no cookie is ever set, no body is ever parsed, no outbound request is ever made) have
 no guard to remove. They are proved by tests that observe the behaviour: no `Set-Cookie` on any route, a 5 MB body is refused
 unread, and the audit fails on any `fetch(` without a timeout in server code.
+
+## The 2026-10-29 change and the attack surface
+
+No server code, route or setting changed, so no server control changed. The change is client-side, and this is what it added:
+
+| New thing | Trust question | Result |
+|-----------|----------------|--------|
+| `/help` address | Can the new address be used to reach another screen or a file? | It parses only the exact path (`/help` or `/help/`); `/help/now`, `/help/../privacy`, `/HELP` and `/helpme` are not found (`tests/unit/route.test.ts`). The server answers it with the same HTML shell as every other screen, so it has no new server behaviour |
+| Text typed on the Help screen | Is it markup, is it stored, is it sent? | It is cleaned (control and format characters and angle brackets become spaces, 120 characters at most), rendered by React as text, never stored (a test reads both storage areas) and never sent. It reaches the clipboard only as plain text when the button is pressed |
+| The clipboard write | Does a refusal look like a success? | No. A refused write and a missing clipboard both show "Could not copy" and leave the text selectable. Proved in jsdom (stubs) and in Chrome, where a denied permission produced the failure message and a granted one wrote the text, which was read back |
+| New `sessionStorage` keys (`roadsmith:steps:<id>`, `roadsmith:safety`) | Is stored text trusted when read? | No. Both are read through the same validator as the tools key: at most two digits per item, in range, de-duplicated; markup, negatives and out-of-range numbers are dropped (tests with `<b>,99,-1,2,2` and `0,1,<i>,99`) |
+| Outbound links on the Help screen | Does it widen the host allow-list? | No. It uses the same map-search builder; a test requires all three to be `www.google.com/maps/search/` with `noopener` and `noreferrer` |
+| `help.model.json` | Does it ship anything sensitive or change what is sent first? | It is static text and, being used only by lazily loaded screens, is not in the first-load scripts (`tests/build`, with a positive control) |
+| Dependencies | New packages? | None. One Tabler icon was added to the existing import list |
+
+The privacy page was updated in the same change so it says what is stored (tool, repair-step and safety ticks) and that the Help
+summary exists only on its page and goes to the clipboard only on a press (PRC-11, UI-12).
 
 ## Checked and found sound
 
@@ -116,8 +151,9 @@ HSTS decision.
 - Strix, the autonomous penetration test (AGENTS.md 7.4), has not been run. It needs Docker, an LLM key and the owner's written
   go-ahead.
 - No deployment: nothing was tested behind a real proxy, with real TLS or on a real host.
-- Only Chrome was driven. Edge, Firefox and Safari were not, so their handling of the content security policy and of
-  `light-dark()` is untested here.
+- Only Chrome was driven on the current design. Edge and Brave were driven earlier on 2026-10-29 on the previous design and
+  passed; Firefox could not be launched headless here and Safari was not available, so their handling of the content security
+  policy, `light-dark()` and the clipboard API is untested.
 - Screen readers were not run by hand; accessibility was checked with axe-core and the keyboard order only.
 - The Privacy and Terms text was not reviewed by a lawyer.
 

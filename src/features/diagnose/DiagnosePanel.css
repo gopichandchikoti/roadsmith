@@ -4,11 +4,6 @@
   gap: var(--space-md);
 }
 
-.diagnose__step {
-  color: var(--color-muted);
-  font-size: var(--text-sm);
-}
-
 .diagnose__list {
   display: grid;
   gap: var(--space-xs);

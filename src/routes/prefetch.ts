@@ -4,5 +4,6 @@
  */
 export function prefetchScreens(): void {
   void import('../pages/FixPage')
+  void import('../pages/HelpPage')
   void import('../features/diagnose/DiagnosePanel')
 }

@@ -5,6 +5,7 @@ export type Route =
   | { name: 'home'; query: string; category: string | null }
   | { name: 'diagnose'; symptom: string | null; option: number | null }
   | { name: 'fix'; id: string }
+  | { name: 'help' }
   | { name: 'privacy' }
   | { name: 'terms' }
   | { name: 'notFound' }
@@ -39,6 +40,7 @@ export function parseRoute(pathname: string, search = ''): Route {
     const id = slugOrNull(second)
     return id ? { name: 'fix', id } : NOT_FOUND
   }
+  if (first === 'help' && second === undefined) return { name: 'help' }
   if (first === 'privacy' && second === undefined) return { name: 'privacy' }
   if (first === 'terms' && second === undefined) return { name: 'terms' }
   return NOT_FOUND
@@ -58,6 +60,7 @@ export const hrefs = {
     return option === undefined ? `/diagnose/${symptom}` : `/diagnose/${symptom}/${option}`
   },
   fix: (id: string): string => `/fix/${id}`,
+  help: '/help',
   privacy: '/privacy',
   terms: '/terms',
 } as const

@@ -10,18 +10,18 @@
 }
 
 /*
- * The highlight is one element that slides between the two items on the snappy spring. Only transform moves. It is a tint
- * with an edge, not a solid fill, and the label keeps the same ink in every state, so the text is readable whether or not the
- * highlight has painted and in forced-colour modes.
+ * The highlight is one element that slides between the two items on the snappy spring. Only transform moves. It is a raised
+ * tint with a heavy yellow (night) or black (day) edge, not a solid fill, and the label keeps the same ink in every state, so
+ * the text is readable whether or not the highlight has painted and in forced-colour modes.
  */
 .mode-switch__thumb {
   position: absolute;
   inset-block: var(--space-2xs);
   inset-inline-start: var(--space-2xs);
   inline-size: calc((100% - 2 * var(--space-2xs)) / 2);
-  border: var(--rule-hair) solid var(--color-violet);
+  border: var(--rule-bold) solid var(--color-highlight);
   border-radius: var(--radius-control);
-  background: var(--color-violet-tint);
+  background: var(--color-paper-3);
   transition: transform var(--spring-snappy-time) var(--spring-snappy);
 }
 

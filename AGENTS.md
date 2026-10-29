@@ -657,14 +657,16 @@ work**, not to make the code look secure.
 
 Roadsmith is a roadside fix finder for a driver who has stopped with a problem. The driver names the problem, or answers two
 questions about a symptom, and gets a plain verdict (fix it here, drive carefully to a shop, or get help without driving),
-the tools and parts to have ready, short steps, a video search for their vehicle and a link to nearby help. It is a
+the tools and parts to have ready, short steps to tick off, a video search for their vehicle and a link to nearby help. A Help
+page, one tap from every screen, makes the car safe, finds help nearby and builds the words to read out on the phone. It is a
 React 19 and TypeScript client built with Vite, served by a small Node and Express server. It has no accounts, no database, no
-uploads and no analytics. The visual design is yellow, black and purple only (the owner's brief); the design record is in
-`system_design.md`.
+uploads and no analytics. The visual design is yellow and black only (the owner's brief, changed on 2026-10-29 from yellow, black
+and purple); the design record is in `system_design.md`.
 
 - `src/` client: `api` (catalog loader and cache), `components`, `features` (`browse`, `diagnose`, `fix`, `preferences`,
   `legal`), `hooks`, `pages`, `routes`, `templates`, `themes`, `utils`, `validators`, `@types`. `main.tsx` mounts the app and
-  `App.tsx` owns the shell. Every visible string is in `src/content.model.json`; the problem catalog is
+  `App.tsx` owns the shell. Every visible string is in `src/content.model.json`, except the Help copy in `src/help.model.json`
+  and the legal text in `src/legal.model.json`, which only lazily loaded screens use. The problem catalog is
   `src/catalog.model.json` and loads on demand as its own chunk.
 - `server/` backend: `config`, `middlewares`, `routes`, `helpers`, `@types`. `app.ts` builds the app, `index.ts` starts it.
 - `scripts/`: the standards audit, the spring generator, build precompression.
@@ -683,12 +685,16 @@ Read `system_design.md` and `FEATURE_LOG.md` (kept locally) before substantial w
 - The client talks only to same origin `/api`. The only outbound navigation is a link the driver taps, to `youtube.com/results`
   or `google.com/maps/search`, built from the catalog's own search words and the driver's own vehicle text. A test fixes that
   allow-list.
-- The driver's vehicle text, the theme choice and ticks on a checklist are stored in the browser only (`localStorage` and
-  `sessionStorage`). Nothing syncs and the server never receives them. Do not imply otherwise in copy or docs.
+- The driver's vehicle text, the theme choice and ticks on the checklists (tools, repair steps, safety steps) are stored in the
+  browser only (`localStorage` and `sessionStorage`). Nothing syncs and the server never receives them. The Help page's summary
+  is built on the page from the vehicle text and a short note, copied only when the driver presses the button, and never stored
+  or sent. Do not imply otherwise in copy or docs.
 - There are no secrets in this project: no API key, no database credential, no signing key. A new variable that holds one is a
   design change (SEC-23, SEC-24) and needs its production start-up rule and its test in the same change.
-- Palette: yellow, black and purple, with tinted neutrals. A new colour outside those three families needs the owner's word.
-  Status is carried by wording, position and icon as well as colour (UI-30).
+- Palette: signal yellow and a warm black only, with every neutral a tint of one of them. A new colour outside those two needs
+  the owner's word (`tests/unit/contrast.test.ts` fails if a colour's hue leaves the yellow range). Night is a black page with a
+  yellow band; day is a yellow page with a black band. With one hue, status is carried by wording, position, icon and the weight
+  of the surface (hairline, heavy edge, solid plate), never by colour (UI-30).
 - Documentation and copy describe Roadsmith on its own terms. They do not name other products.
 - Do not touch the generated `dist/` and `dist-server/` folders by hand. `pnpm motion:generate` rewrites
   `src/themes/motion.css`.

@@ -1,0 +1,7 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.help {
+  display: grid;
+  gap: var(--space-lg);
+  max-inline-size: var(--column);
+  margin-inline: auto;
+}

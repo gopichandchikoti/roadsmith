@@ -1,0 +1,25 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.callsheet__text {
+  min-block-size: 0;
+  padding-inline-end: var(--space-md);
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.callsheet__empty {
+  color: var(--color-muted);
+}
+
+.callsheet__status {
+  display: block;
+  color: var(--color-highlight);
+  font-weight: 700;
+}
+
+/* The live region stays in the page so a screen reader hears it change, but takes no room until it has something to say. */
+.callsheet__status:empty {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+}

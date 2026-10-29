@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  MAX_NOTE_LENGTH,
   MAX_QUERY_LENGTH,
   MAX_VEHICLE_LENGTH,
+  normalizeNote,
   normalizeQuery,
   normalizeVehicle,
   parseCheckedItems,
@@ -35,6 +37,18 @@ test('a search is cleaned of control characters and brackets, collapsed and capp
   assert.equal(normalizeQuery('a\u0000b'), 'a b')
   assert.equal(normalizeQuery('<b>x</b>'), 'b x /b')
   assert.equal(normalizeQuery('y'.repeat(500)).length, MAX_QUERY_LENGTH)
+})
+
+test('the note on the Help screen is cleaned of control characters and brackets, collapsed and capped', () => {
+  assert.equal(normalizeNote('  flat   tire\non the left  '), 'flat tire on the left')
+  assert.equal(normalizeNote('<script>alert(1)</script>'), 'script alert(1) /script')
+  // A control character, a bracket and a zero width character each become a space and are collapsed.
+  assert.equal(normalizeNote('a\u0000b<c>\u001fd​e'), 'a b c d e')
+  assert.equal(normalizeNote('x'.repeat(500)).length, MAX_NOTE_LENGTH)
+  assert.equal(normalizeNote(''), '')
+  assert.equal(normalizeNote('   '), '')
+  // A note keeps the punctuation a sentence needs, unlike a vehicle name.
+  assert.equal(normalizeNote("It's making a grinding noise, again."), "It's making a grinding noise, again.")
 })
 
 test('only the three theme names are accepted from storage', () => {

@@ -1,13 +1,14 @@
 /* Hallmark · shape: app screen · genre: modern-minimal · theme: custom
- * paper: oklch(18.4% 0.036 293) · accent: oklch(87.7% 0.174 93) · display: Archivo (width 78, weight 800) · body: Archivo
- * nav: top bar, wordmark left, theme control right · signature: the verdict ladder · states: loading, empty, error, full
- * axes: dark/grotesk-heavy/chromatic-yellow · posture: follows the device, night and day from one set of tokens · contrast: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: H, the home list is long, so the vehicle and the way in are grouped in a rail and the list is grouped by category */
-/* Hallmark · dismissed 23 · on a get-help result the solid yellow verdict row, the warning and the one action are the single signal that screen exists to give, so they are meant to be loud */
+ * paper: oklch(15.5% 0.012 95) night, oklch(90% 0.16 97) day · accent: oklch(87.7% 0.174 93) · display: Archivo (width 78, weight 800) · body: Archivo
+ * nav: top bar, wordmark left, help link and theme control right · signature: the verdict ladder · states: loading, empty, error, full
+ * axes: dark/grotesk-heavy/chromatic-yellow · posture: committed, yellow and black only: night is a black page with a yellow band, day paints the page yellow and flips the band to black · contrast: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: H, the home list is long, so a search band, the common problems and the category list come first and the vehicle sits with the way in */
+/* Hallmark · dismissed 23 · the yellow in the night band, the primary action and the get-help verdict is a declared committed surface; the colour belongs to band and accent tokens, and the day theme flips them to black on a yellow page */
 
 /*
  * Design tokens (design record 2.2 to 2.5). Every colour pair is measured in tests/unit/contrast.test.ts. A colour is written
- * once with light-dark(day, night); the theme switch only changes color-scheme.
+ * once with light-dark(day, night); the theme switch only changes color-scheme. The palette is two hues: signal yellow and a
+ * warm black. Every neutral is a tint of one of them, so nothing on a screen is a third colour.
  */
 :root {
   color-scheme: light dark;
@@ -36,6 +37,7 @@
   --radius-panel: 12px;
   --radius-pill: 999px;
   --rule-hair: 1px;
+  --rule-bold: 2px;
   --control-height: 2.75rem;
 
   --column: 44rem;
@@ -47,24 +49,21 @@
   --font-body: "Archivo Variable", "Archivo Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-body);
 
-  --color-paper: light-dark(#f7f4fc, #130f21);
-  --color-paper-2: light-dark(#fdfbff, #1c1632);
-  --color-paper-3: light-dark(#ede6fa, #271e48);
-  --color-rule: light-dark(#d8cfee, #3e3466);
-  --color-rule-strong: light-dark(#7b6fa8, #7a6db0);
-  --color-ink: light-dark(#1a1230, #f4f0ff);
-  --color-ink-2: light-dark(#40365f, #cfc7ea);
-  --color-muted: light-dark(#5c5282, #a99fcf);
-  --color-accent: #ffd21f;
-  --color-accent-ink: #1a1330;
-  --color-violet: light-dark(#4a2db8, #b9a2ff);
-  --color-violet-fill: light-dark(#4a2db8, #5a3cc8);
-  --color-violet-ink: #f8f5ff;
-  --color-violet-tint: light-dark(#e6ddfa, #2b2160);
-  --color-signal-tint: light-dark(#fff1b0, #332b12);
-  --color-signal-edge: light-dark(#8f7000, #ffd21f);
-  --color-focus: light-dark(#4a2db8, #ffd21f);
-  --color-brand: light-dark(#4a2db8, #ffd21f);
+  --color-paper: light-dark(#fcde4d, #0e0c07);
+  --color-paper-2: light-dark(#fef0a9, #17150d);
+  --color-paper-3: light-dark(#fff9d3, #232016);
+  --color-rule: light-dark(#c8ad3f, #35301f);
+  --color-rule-strong: light-dark(#61510c, #877738);
+  --color-ink: light-dark(#0e0c07, #f8f2cc);
+  --color-ink-2: light-dark(#352e11, #d8cfa2);
+  --color-muted: light-dark(#52471f, #b1a572);
+  --color-accent: light-dark(#0e0c07, #ffd21f);
+  --color-accent-ink: light-dark(#ffd21f, #0e0c07);
+  --color-band: light-dark(#0e0c07, #ffd21f);
+  --color-band-ink: light-dark(#ffd21f, #0e0c07);
+  --color-highlight: light-dark(#0e0c07, #ffd21f);
+  --color-signal-tint: light-dark(#fff9d3, #302701);
+  --color-focus: light-dark(#0e0c07, #ffd21f);
 }
 
 :root[data-theme="light"] {
@@ -78,21 +77,21 @@
 /* A browser without light-dark() gets the night values, so it never shows unstyled text. */
 @supports not (color: light-dark(#111111, #eeeeee)) {
   :root {
-    --color-paper: #130f21;
-    --color-paper-2: #1c1632;
-    --color-paper-3: #271e48;
-    --color-rule: #3e3466;
-    --color-rule-strong: #7a6db0;
-    --color-ink: #f4f0ff;
-    --color-ink-2: #cfc7ea;
-    --color-muted: #a99fcf;
-    --color-violet: #b9a2ff;
-    --color-violet-fill: #5a3cc8;
-    --color-violet-tint: #2b2160;
-    --color-signal-tint: #332b12;
-    --color-signal-edge: #ffd21f;
+    --color-paper: #0e0c07;
+    --color-paper-2: #17150d;
+    --color-paper-3: #232016;
+    --color-rule: #35301f;
+    --color-rule-strong: #877738;
+    --color-ink: #f8f2cc;
+    --color-ink-2: #d8cfa2;
+    --color-muted: #b1a572;
+    --color-accent: #ffd21f;
+    --color-accent-ink: #0e0c07;
+    --color-band: #ffd21f;
+    --color-band-ink: #0e0c07;
+    --color-highlight: #ffd21f;
+    --color-signal-tint: #302701;
     --color-focus: #ffd21f;
-    --color-brand: #ffd21f;
   }
 }
 

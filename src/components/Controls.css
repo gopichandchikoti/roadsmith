@@ -17,6 +17,7 @@
   cursor: pointer;
 }
 
+/* The one loud button: a yellow plate with black text at night, a black plate with yellow text on the yellow day page. */
 .button--primary {
   background: var(--color-accent);
   border-color: var(--color-accent);
@@ -42,7 +43,7 @@
 }
 
 .button--quiet:active {
-  border-color: var(--color-violet);
+  border-color: var(--color-highlight);
   background: var(--color-paper-3);
 }
 
@@ -139,7 +140,7 @@
   inset-inline-end: var(--space-md);
   display: flex;
   align-items: center;
-  color: var(--color-violet);
+  color: var(--color-highlight);
   pointer-events: none;
 }
 
@@ -147,12 +148,32 @@
   transform: rotate(90deg);
 }
 
+/* Inside the hero band the page colours are reversed: the field takes the band's text colour as its fill and keeps the page's ink. */
+.field--band .field__label,
+.field--band .field__hint {
+  color: var(--color-band-ink);
+}
+
+.field--band .field__input {
+  border-color: var(--color-band-ink);
+  background: var(--color-band-ink);
+  color: var(--color-ink);
+}
+
+.field--band .field__icon {
+  color: var(--color-muted);
+}
+
+.field--band .field__clear {
+  color: var(--color-ink-2);
+}
+
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2xs);
   min-block-size: var(--control-height);
-  color: var(--color-violet);
+  color: var(--color-highlight);
   font-weight: 700;
   text-decoration: none;
 }

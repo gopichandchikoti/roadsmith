@@ -17,24 +17,22 @@ type HomePageProps = {
 }
 
 /**
- * The way in: the vehicle, the choice between naming the problem or answering questions, and the panel for that choice.
- * On a wide screen the vehicle and the choice sit in a rail beside the panel; on a phone they stack above it.
+ * The way in: the choice between naming the problem or answering questions, and the panel for that choice. The optional vehicle
+ * box is handed to the panel, which puts it just under the hero so the search stays near the top of a phone screen. It is one
+ * centred column at every width, the same as the Help screen, so nothing sits beside an empty half.
  */
 export function HomePage({ route }: HomePageProps) {
   return (
     <div className="home">
       <HazardNote />
-      <div className="home__rail">
-        <VehicleField />
-        <ModeSwitch active={route.name === 'home' ? 'browse' : 'diagnose'} />
-      </div>
+      <ModeSwitch active={route.name === 'home' ? 'browse' : 'diagnose'} />
       <div className="home__panel">
         {route.name === 'home' ? (
-          <BrowsePanel query={route.query} category={route.category} />
+          <BrowsePanel query={route.query} category={route.category} vehicleField={<VehicleField />} />
         ) : (
           <ChunkBoundary>
             <Suspense fallback={<ListSkeleton />}>
-              <DiagnosePanel symptom={route.symptom} option={route.option} />
+              <DiagnosePanel symptom={route.symptom} option={route.option} vehicleField={<VehicleField />} />
             </Suspense>
           </ChunkBoundary>
         )}

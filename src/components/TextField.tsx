@@ -17,6 +17,8 @@ type TextFieldProps = {
   type?: 'text' | 'search'
   /** Keeps the label for assistive technology but does not draw it, for a field whose placeholder and icon already say what it is. */
   hideLabel?: boolean
+  /** `band` is for a field that sits inside the hero band, where the page colours are reversed. */
+  tone?: 'page' | 'band'
 }
 
 /** A labelled text box with an optional hint and a clear button that appears once there is something to clear. */
@@ -32,10 +34,11 @@ export function TextField({
   icon,
   type = 'text',
   hideLabel = false,
+  tone = 'page',
 }: TextFieldProps) {
   const id = useId()
   return (
-    <div className="field">
+    <div className={cx('field', tone === 'band' && 'field--band')}>
       <label htmlFor={`${id}-input`} className={cx('field__label', hideLabel && 'visually-hidden')}>
         {label}
       </label>

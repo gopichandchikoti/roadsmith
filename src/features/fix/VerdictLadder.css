@@ -31,18 +31,19 @@
   color: var(--color-ink);
 }
 
+/* The weight of the current row rises with the seriousness: a hairline, a heavy edge, a solid plate. */
 .ladder__row[data-current="true"][data-verdict="fix"] {
-  border-color: var(--color-violet);
-  background: var(--color-violet-tint);
+  border-color: var(--color-rule-strong);
+  background: var(--color-paper-3);
 }
 
 .ladder__row[data-current="true"][data-verdict="limp"] {
-  border-color: var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   background: var(--color-signal-tint);
 }
 
 .ladder__row[data-current="true"][data-verdict="help"] {
-  border-color: var(--color-accent-ink);
+  border-color: var(--color-accent);
   background: var(--color-accent);
   color: var(--color-accent-ink);
 }
@@ -89,6 +90,12 @@
   color: var(--color-paper);
   font-size: var(--text-sm);
   font-weight: 700;
+}
+
+/* On the solid get-help plate the tag reverses the plate's colours, so it stays visible in both themes. */
+.ladder__row[data-current="true"][data-verdict="help"] .ladder__tag {
+  background: var(--color-accent-ink);
+  color: var(--color-accent);
 }
 
 @media (min-width: 36rem) {

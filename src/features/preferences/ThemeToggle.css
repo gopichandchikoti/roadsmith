@@ -33,14 +33,14 @@
   place-items: center;
   inline-size: 100%;
   block-size: 100%;
-  border: var(--rule-hair) solid transparent;
+  border: var(--rule-bold) solid transparent;
   border-radius: var(--radius-control);
   color: var(--color-ink-2);
 }
 
 .theme-toggle__input:checked + .theme-toggle__face {
-  border-color: var(--color-violet);
-  background: var(--color-violet-tint);
+  border-color: var(--color-highlight);
+  background: var(--color-paper-3);
   color: var(--color-ink);
 }
 

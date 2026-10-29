@@ -43,14 +43,21 @@ test('every script file is 250 KB or less, and every file under /assets carries 
   }
 })
 
-test('the problem catalog and the legal text are not in the first load (PERF-10)', () => {
+test('the problem catalog, the legal text and the Help copy are not in the first load (PERF-10)', () => {
   const initial = initialScripts.map((url) => readFileSync(assetPath(url), 'utf8')).join('\n')
   assert.ok(!initial.includes('Sidewall bulge or blowout'), 'the catalog is in the initial scripts')
   assert.ok(!initial.includes('What Roadsmith stores'), 'the legal text is in the initial scripts')
+  assert.ok(!initial.includes('Make the car safe'), 'the Help copy is in the initial scripts')
   const lazy = readdirSync(assets).filter(
-    (name) => /^(?:catalog|FixPage|LegalPage|DiagnosePanel)/.test(name) && name.endsWith('.js'),
+    (name) => /^(?:catalog|FixPage|HelpPage|LegalPage|DiagnosePanel)/.test(name) && name.endsWith('.js'),
   )
-  assert.ok(lazy.length >= 4, `expected separate files for the catalog and the other screens, found ${lazy.join(', ')}`)
+  assert.ok(lazy.length >= 5, `expected separate files for the catalog and the other screens, found ${lazy.join(', ')}`)
+  // A search that finds nothing proves nothing (PRC-10): the same words must be found in the files that are loaded on demand.
+  const everything = readdirSync(assets)
+    .filter((name) => name.endsWith('.js'))
+    .map((name) => readFileSync(path.join(assets, name), 'utf8'))
+    .join('\n')
+  assert.ok(everything.includes('Make the car safe'), 'the Help copy is in no script at all, so the check above proves nothing')
 })
 
 test('the page is built from the content model, with deferred module scripts and no inline script or style (PERF-20)', () => {

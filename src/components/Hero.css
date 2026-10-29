@@ -1,0 +1,53 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+/*
+ * The band at the head of a screen. It is a surface token, not the accent: night paints it yellow with black text, day paints it
+ * black with yellow text. Inside it the focus ring takes the text colour, because the page's ring is the same colour as the band.
+ */
+.hero {
+  --color-focus: var(--color-band-ink);
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--radius-panel);
+  background: var(--color-band);
+  color: var(--color-band-ink);
+}
+
+.hero__lede {
+  max-inline-size: 52ch;
+  line-height: 1.4;
+}
+
+.hero__step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.hero__meter {
+  display: flex;
+  gap: var(--space-2xs);
+}
+
+.hero__segment {
+  inline-size: 2rem;
+  block-size: 0.5rem;
+  border: var(--rule-bold) solid currentcolor;
+  border-radius: var(--radius-pill);
+}
+
+.hero__segment[data-filled="true"] {
+  background: currentcolor;
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .hero__lede {
+    font-size: var(--text-lg);
+  }
+}

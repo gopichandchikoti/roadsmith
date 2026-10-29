@@ -1,40 +1,9 @@
 /* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
-.steps {
-  display: grid;
-  gap: var(--space-md);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: step;
-}
-
-.steps__item {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  gap: var(--space-sm);
-  counter-increment: step;
-}
-
-.steps__item::before {
-  content: counter(step);
-  display: grid;
-  place-items: center;
-  inline-size: 2rem;
-  block-size: 2rem;
-  border: var(--rule-hair) solid var(--color-violet);
-  border-radius: var(--radius-pill);
-  background: var(--color-violet-tint);
-  color: var(--color-ink);
-  font-variant-numeric: tabular-nums;
-  font-weight: 800;
-}
-
 .stop-panel {
   display: grid;
   gap: var(--space-xs);
   padding: var(--space-md);
-  border: var(--rule-hair) solid var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   border-radius: var(--radius-panel);
   background: var(--color-signal-tint);
 }

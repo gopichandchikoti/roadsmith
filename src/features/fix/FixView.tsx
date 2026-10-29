@@ -1,6 +1,7 @@
 import type { Problem } from '../../@types/catalog'
 import { BackLink } from '../../components/BackLink'
 import { Button, ButtonLink } from '../../components/Button'
+import { CallSheet } from '../../components/CallSheet'
 import { HazardNote } from '../../components/HazardNote'
 import { Icon } from '../../components/Icon'
 import { ClockIcon, OfflineIcon, RetryIcon, SkillIcon } from '../../components/icons'
@@ -12,6 +13,7 @@ import { useCatalog } from '../../hooks/useCatalog'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { hrefs } from '../../routes/route'
 import { fill } from '../../utils/format'
+import { buildSummary } from '../../utils/summary'
 import { usePreferences } from '../../hooks/usePreferences'
 import { HelpBanner } from './HelpBanner'
 import { HighwayPanel } from './HighwayPanel'
@@ -107,11 +109,16 @@ function FixResult({ problem }: { problem: Problem }) {
           <ToolChecklist problemId={problem.id} tools={problem.tools} />
         </div>
         <div className="fix__area fix__area--steps">
-          <StepList verdict={problem.verdict} steps={problem.steps} />
+          <StepList problemId={problem.id} verdict={problem.verdict} steps={problem.steps} />
         </div>
         <div className="fix__area fix__area--stop">
           <StopPanel stopIf={problem.stopIf} />
         </div>
+        {problem.verdict === 'fix' ? null : (
+          <div className="fix__area fix__area--sheet">
+            <CallSheet summary={buildSummary({ vehicle, problem: problem.name, details: problem.summary })} />
+          </div>
+        )}
         <div className="fix__area fix__area--tutorial">
           <TutorialPanel vehicle={vehicle} videoQuery={problem.videoQuery} />
         </div>

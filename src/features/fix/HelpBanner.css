@@ -4,7 +4,7 @@
   justify-items: start;
   gap: var(--space-md);
   padding: var(--space-md);
-  border: 2px solid var(--color-signal-edge);
+  border: var(--rule-bold) solid var(--color-highlight);
   border-radius: var(--radius-panel);
   background: var(--color-signal-tint);
 }
@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  color: var(--color-signal-edge);
+  color: var(--color-highlight);
 }
 
 .help-banner__title {

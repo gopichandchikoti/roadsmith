@@ -12,7 +12,7 @@
 }
 
 .fix__vehicle {
-  color: var(--color-violet);
+  color: var(--color-highlight);
   font-weight: 700;
 }
 
@@ -55,39 +55,7 @@
   display: flex;
 }
 
-/* Shared by every panel on the result screen. A panel is one box: nothing inside it is boxed again. */
-.panel {
-  display: grid;
-  gap: var(--space-sm);
-  padding: var(--space-md);
-  border: var(--rule-hair) solid var(--color-rule);
-  border-radius: var(--radius-panel);
-  background: var(--color-paper-2);
-}
-
-.panel__title {
-  font-size: var(--text-xl);
-}
-
-.panel > p {
-  max-inline-size: 60ch;
-  color: var(--color-ink-2);
-}
-
-.panel__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-}
-
-.panel__list {
-  display: grid;
-  gap: var(--space-xs);
-  padding-inline-start: var(--space-lg);
-  color: var(--color-ink-2);
-}
-
-/* On a wide screen the six panels flow into two balanced columns, in reading order. */
+/* On a wide screen the panels flow into two balanced columns, in reading order. The panel itself is in components/Panel.css. */
 @media (min-width: 64rem) {
   .fix {
     max-inline-size: none;
@@ -95,7 +63,8 @@
 
   .fix__head,
   .fix > .ladder,
-  .fix > .help-banner {
+  .fix > .help-banner,
+  .fix > .hazard-note {
     max-inline-size: var(--column);
   }
 
