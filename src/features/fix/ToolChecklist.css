@@ -1,0 +1,110 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.checklist {
+  position: relative;
+}
+
+.checklist__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.checklist__progress {
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.checklist__bar {
+  block-size: 0.375rem;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-paper-3);
+}
+
+/* The bar grows by scaling, not by changing its width, so it moves on the compositor with the snappy spring. */
+.checklist__fill {
+  block-size: 100%;
+  background: var(--color-violet);
+  transform-origin: left center;
+  transition: transform var(--spring-snappy-time) var(--spring-snappy);
+}
+
+.checklist__fill:dir(rtl) {
+  transform-origin: right center;
+}
+
+.checklist__list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  min-block-size: var(--control-height);
+  padding-block: var(--space-xs);
+  cursor: pointer;
+}
+
+.check__input {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.check__box {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: 2px solid var(--color-rule-strong);
+  border-radius: var(--radius-control);
+  color: transparent;
+}
+
+.check__input:checked + .check__box {
+  border-color: var(--color-violet);
+  background: var(--color-violet-fill);
+  color: var(--color-violet-ink);
+}
+
+.check__input:focus-visible + .check__box {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.check__text {
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+
+.check__input:checked ~ .check__text {
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
+.checklist__done {
+  display: block;
+  color: var(--color-violet);
+  font-weight: 700;
+}
+
+/* The live region stays in the page so a screen reader hears it change, but takes no room until it has something to say. */
+.checklist__done:empty {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+}

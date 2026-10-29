@@ -1,0 +1,5 @@
+packages:
+  - '.'
+# Install scripts are reviewed explicitly: esbuild (tsx) may run; nothing else needs to.
+allowBuilds:
+  esbuild: true

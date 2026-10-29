@@ -1,0 +1,92 @@
+{
+  "updatedLabel": "Last updated",
+  "privacy": {
+    "title": "Privacy",
+    "updated": "28 October 2026",
+    "sections": [
+      {
+        "heading": "What Roadsmith stores",
+        "paragraphs": [
+          "Roadsmith has no accounts. It keeps three things, all in your own browser: the vehicle text you type, your color theme choice, and the tools you tick off on a checklist.",
+          "The vehicle and the theme stay until you clear your browser data or use the Clear vehicle button. Checklist ticks last until you close the tab. None of it is sent to the Roadsmith server."
+        ]
+      },
+      {
+        "heading": "What the server sees",
+        "paragraphs": [
+          "When you open a page, the server receives the usual request details: your network address, the page you asked for and your browser type. The Roadsmith server sets no cookies and writes no record of these details.",
+          "It writes a log line only when something goes wrong, with a request number, the request method, the path and the name of the error. The company that hosts the service, or a proxy in front of it, may keep its own ordinary request logs."
+        ]
+      },
+      {
+        "heading": "Links to other sites",
+        "paragraphs": [
+          "Roadsmith loads nothing from other sites: fonts, scripts and images all come from the same address.",
+          "When you tap a link to YouTube or Google Maps, that site opens in a new tab and receives the words in the search, which include your vehicle text for tutorial searches. Its own privacy policy applies from there. Roadsmith never asks for your location. Google Maps may ask for it."
+        ]
+      },
+      {
+        "heading": "Analytics and advertising",
+        "paragraphs": [
+          "Roadsmith has no analytics, no advertising and no tracking."
+        ]
+      },
+      {
+        "heading": "Your choices",
+        "paragraphs": [
+          "Use the Clear vehicle button, or clear site data in your browser settings, to remove everything Roadsmith has stored."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "paragraphs": [
+          "If this page changes, the date at the top changes with it."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms",
+    "updated": "28 October 2026",
+    "sections": [
+      {
+        "heading": "What Roadsmith is",
+        "paragraphs": [
+          "Roadsmith is an information tool for common car problems. It gives general guidance. It is not a mechanic, a roadside assistance service or an emergency service."
+        ]
+      },
+      {
+        "heading": "Safety comes first",
+        "paragraphs": [
+          "Use your own judgment. If you are in danger, or anyone is hurt, call your local emergency number (911 in the US and Canada, 112 in the EU) before anything else.",
+          "If a step feels unsafe, do not do it. Treat anything you are unsure about as a reason to get help."
+        ]
+      },
+      {
+        "heading": "No guarantee",
+        "paragraphs": [
+          "The guidance may be incomplete or may not fit your vehicle. Check your owner's manual.",
+          "The service is provided as it is, with no promise that it is accurate, complete or always available. To the extent the law allows, its operator is not liable for damage, injury or loss that follows from using it."
+        ]
+      },
+      {
+        "heading": "Other sites",
+        "paragraphs": [
+          "Links to video searches and maps lead to other companies. Roadsmith has no connection with them or with any business, tutorial or tow service they show, and does not endorse them."
+        ]
+      },
+      {
+        "heading": "Using the service",
+        "paragraphs": [
+          "Use Roadsmith for your own lawful, personal purposes. Do not try to disrupt it, collect its content at a high rate or probe it for weaknesses without the operator's permission."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "paragraphs": [
+          "These terms may change. The date at the top shows the latest version."
+        ]
+      }
+    ]
+  }
+}

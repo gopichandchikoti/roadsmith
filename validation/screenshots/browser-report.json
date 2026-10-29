@@ -1,0 +1,98 @@
+{
+  "screenshots": 80,
+  "overflow": [],
+  "console": [],
+  "failedRequests": [],
+  "csp": [],
+  "axe": [],
+  "focus": [
+    {
+      "tag": "A",
+      "label": "Skip to the content",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Roadsmith, home",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "INPUT",
+      "label": "",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "INPUT",
+      "label": "_r_0_-input",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "I know the problem",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Help me find it",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "INPUT",
+      "label": "_r_2_-input",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "SELECT",
+      "label": "All problemsTires and wheelsStarting tro",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Flat tireFix it here",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Tire pressure warning lightFix it here",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Leaking valve stemDrive carefully to a s",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Sidewall bulge or blowoutGet help",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Loose or missing lug nutsFix it here",
+      "outline": "solid 3px",
+      "offset": "2px"
+    },
+    {
+      "tag": "A",
+      "label": "Shaking at speedDrive carefully to a sho",
+      "outline": "solid 3px",
+      "offset": "2px"
+    }
+  ],
+  "notes": [
+    "reduced motion: entrance animation-duration = 1e-05s",
+    "throttled (4x CPU, 1.6 Mbit/s, 150 ms): LCP 492 ms, CLS 0, transferred 173 KiB (compressed), slowest interactions [48,48,48,48] ms"
+  ]
+}

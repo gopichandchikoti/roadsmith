@@ -1,0 +1,26 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.list-skeleton__rows {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-skeleton__row {
+  block-size: 4.25rem;
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-control);
+  background: var(--color-paper-2);
+  animation: skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 0.45;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

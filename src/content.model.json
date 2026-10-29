@@ -1,0 +1,161 @@
+{
+  "locale": "en",
+  "document": {
+    "title": "Roadsmith: roadside fix finder",
+    "description": "Name the car problem, or answer two questions, and get a plain verdict, the tools to have ready and the steps to follow.",
+    "titleSuffix": "Roadsmith",
+    "noscript": "Roadsmith needs JavaScript to show its problem list. Turn it on in your browser settings and reload this page."
+  },
+  "brand": {
+    "name": "Roadsmith",
+    "homeLabel": "Roadsmith, home",
+    "tagline": "Roadside fix finder"
+  },
+  "skipLink": "Skip to the content",
+  "shell": {
+    "hazard": "Pulled over? Turn on your hazard lights and stay well clear of traffic.",
+    "footer": "Roadsmith gives general guidance for common car problems. It cannot see your car. If anything feels unsafe, treat it as a tow.",
+    "footerNavLabel": "About this service",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "newTab": "(opens in a new tab)"
+  },
+  "theme": {
+    "groupLabel": "Color theme",
+    "system": "Match my device",
+    "light": "Day",
+    "dark": "Night"
+  },
+  "vehicle": {
+    "label": "Your vehicle",
+    "placeholder": "For example, 2019 Toyota Camry",
+    "hint": "Optional. Used to search for tutorials and kept only in this browser.",
+    "clear": "Clear vehicle"
+  },
+  "modes": {
+    "navLabel": "How to find the problem",
+    "browse": "I know the problem",
+    "diagnose": "Help me find it"
+  },
+  "browse": {
+    "title": "Find the problem",
+    "heading": "What is going wrong?",
+    "searchLabel": "Search problems",
+    "searchPlaceholder": "Try flat tire, battery or smoke",
+    "clearSearch": "Clear search",
+    "categoryLabel": "Category",
+    "allCategories": "All problems",
+    "count": {
+      "one": "{count} problem",
+      "other": "{count} problems"
+    },
+    "empty": {
+      "title": "No problems match",
+      "body": "Nothing matches \"{query}\". Try a shorter word, or clear the search and pick a category.",
+      "bodyCategory": "Nothing in this category matches your search. Try a shorter word, or clear the search and the category.",
+      "action": "Clear search and category"
+    }
+  },
+  "diagnose": {
+    "title": "Help me find it",
+    "firstHeading": "What are you noticing?",
+    "step": "Question {current} of {total}",
+    "back": "Back",
+    "likelyHeading": "Most likely",
+    "alsoHeading": "It could also be",
+    "seeFix": "See the fix",
+    "disclaimer": "This is a best guess from your answers, not a mechanic's diagnosis. If anything feels unsafe, treat it as a tow.",
+    "unknown": {
+      "title": "That question is not in the list",
+      "body": "The address does not match any of the symptoms.",
+      "action": "Start again"
+    }
+  },
+  "verdicts": {
+    "heading": "What to do",
+    "ladderLabel": "The three possible outcomes",
+    "current": "This problem",
+    "fix": {
+      "label": "Fix it here",
+      "note": "You can sort this out where you are."
+    },
+    "limp": {
+      "label": "Drive carefully to a shop",
+      "note": "A temporary fix, then get it checked soon."
+    },
+    "help": {
+      "label": "Get help",
+      "note": "Do not drive it. Call a tow, a mechanic or roadside assistance."
+    },
+    "helpBanner": {
+      "title": "Do not drive this car",
+      "body": "Driving on could cause a crash or costly damage. Get help first, then use the steps below while you wait."
+    }
+  },
+  "skills": {
+    "beginner": "Beginner friendly",
+    "moderate": "Some experience needed",
+    "advanced": "Leave it to a professional"
+  },
+  "fix": {
+    "back": "Back",
+    "vehicleLine": "For your {vehicle}",
+    "skillLabel": "Skill",
+    "timeLabel": "Time",
+    "toolsHeading": "Tools and parts",
+    "toolsProgress": "{done} of {total} ready",
+    "toolsDone": "Everything is ready.",
+    "stepsHeading": {
+      "fix": "Steps to fix it",
+      "limp": "Steps to get going",
+      "help": "While you wait"
+    },
+    "tutorial": {
+      "heading": "Video tutorials",
+      "body": "Opens a YouTube search for {vehicle} and this problem in a new tab.",
+      "bodyNoVehicle": "Opens a YouTube search for this problem in a new tab. Add your vehicle on the home screen to narrow it.",
+      "action": "Search YouTube for tutorials"
+    },
+    "nearby": {
+      "heading": "Find help nearby",
+      "note": "Each link opens Google Maps in a new tab and searches near your location.",
+      "partsAction": "Find an auto parts store",
+      "partsQuery": "auto parts store near me",
+      "mechanicAction": "Find a mechanic or tow truck",
+      "mechanicQuery": "mechanic or tow truck near me",
+      "tireAction": "Find a tire shop",
+      "tireQuery": "tire shop near me"
+    },
+    "stopHeading": "When to stop and get help",
+    "highway": {
+      "heading": "If you are on a highway",
+      "items": [
+        "Turn on your hazard lights. Get fully onto the shoulder, or leave at the next exit.",
+        "If it is safe to get out, leave on the side away from traffic and wait behind the guardrail.",
+        "If it is safe to do so, place a warning triangle well behind the car: 100 feet (30 m) or more on a fast road.",
+        "Never work on the traffic side of the car.",
+        "If you feel unsafe, stay buckled inside with your hazard lights on and call your local emergency number or roadside assistance."
+      ]
+    },
+    "restart": "Start over",
+    "unknown": {
+      "title": "That problem is not in the list",
+      "body": "The address does not match any problem Roadsmith knows about.",
+      "action": "Go to the problem list"
+    }
+  },
+  "states": {
+    "loading": "Loading problems",
+    "error": {
+      "title": "The problem list did not load",
+      "body": "Your signal may be weak. Check the connection and try again.",
+      "offlineBody": "You appear to be offline. Reconnect and try again.",
+      "retry": "Try again"
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "That address does not lead anywhere in Roadsmith.",
+    "action": "Go to the problem list"
+  }
+}

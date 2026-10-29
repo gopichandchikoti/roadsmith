@@ -1,0 +1,25 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.help-banner {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 2px solid var(--color-signal-edge);
+  border-radius: var(--radius-panel);
+  background: var(--color-signal-tint);
+}
+
+.help-banner__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-signal-edge);
+}
+
+.help-banner__title {
+  color: var(--color-ink);
+}
+
+.help-banner > p {
+  max-inline-size: 60ch;
+}

@@ -1,0 +1,171 @@
+/* Base rules: reset, type, focus, and the small utilities every screen uses. Colours, sizes and spacing come from tokens.css. */
+
+/*
+ * A fallback that matches Archivo so the swap does not move the page. Measured in Chrome against Archivo at weight 400 and width
+ * 100: a sample sentence is 97.9% as wide in Archivo as in Arial, and Archivo's ascent and descent are 88% and 21% of the size,
+ * which the overrides express against the scaled size (88 / 0.979 and 21 / 0.979).
+ */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial");
+  size-adjust: 97.9%;
+  ascent-override: 89.9%;
+  descent-override: 21.5%;
+  line-gap-override: 0%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--color-paper);
+  scrollbar-color: var(--color-muted) var(--color-paper);
+  scroll-padding-top: var(--space-2xl);
+}
+
+body {
+  margin: 0;
+  min-block-size: 100dvh;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  font-stretch: 100%;
+  font-synthesis: none;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  caret-color: var(--color-accent);
+  padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 40%, transparent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+a {
+  color: var(--color-violet);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  min-inline-size: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 78%;
+  font-synthesis: none;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  /* The condensed width closes up the space between words; this opens it back to a comfortable gap. */
+  word-spacing: var(--word-gap-display);
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+h1,
+.page-heading {
+  font-size: var(--text-2xl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+.page-heading:focus {
+  outline: none;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+p:not([class]) {
+  max-inline-size: 65ch;
+}
+
+ul,
+ol {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  display: block;
+  flex: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.noscript {
+  margin: var(--space-lg) var(--gutter);
+  padding: var(--space-md);
+  border: var(--rule-hair) solid var(--color-signal-edge);
+  border-radius: var(--radius-control);
+  background: var(--color-signal-tint);
+}
+
+@media (min-width: 48rem) {
+  h1,
+  .page-heading {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --rule-hair: 2px;
+  }
+}

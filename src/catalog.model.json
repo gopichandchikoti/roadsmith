@@ -1,0 +1,894 @@
+{
+  "categories": [
+    { "id": "tires", "label": "Tires and wheels" },
+    { "id": "starting", "label": "Starting trouble" },
+    { "id": "warnings", "label": "Dashboard warnings" },
+    { "id": "engine", "label": "Engine, cooling and transmission" },
+    { "id": "brakes", "label": "Brakes and steering" },
+    { "id": "electrical", "label": "Electrical and lights" },
+    { "id": "climate", "label": "Heating, air and glass" },
+    { "id": "weather", "label": "Road and weather" }
+  ],
+  "problems": [
+    {
+      "id": "flat-tire",
+      "category": "tires",
+      "name": "Flat tire",
+      "verdict": "fix",
+      "skill": "moderate",
+      "time": "30 minutes",
+      "summary": "The tire has lost most of its air, usually from a nail, a pothole or a slow leak that finally gave out.",
+      "tools": [
+        "Spare tire, checked for air",
+        "The jack that came with the car",
+        "Lug wrench",
+        "Wheel chock or a heavy stone",
+        "Flashlight",
+        "Work gloves"
+      ],
+      "steps": [
+        "Park on firm, level ground well away from traffic, with the car in Park and the parking brake on.",
+        "Loosen each lug nut half a turn while the wheel is still on the ground.",
+        "Set the jack at the lift point marked in the owner's manual and raise the car until the tire is clear of the ground.",
+        "Remove the nuts, swap the wheel and tighten the nuts by hand in a star pattern.",
+        "Lower the car, then tighten the nuts fully in a star pattern.",
+        "Keep to 50 mph (80 km/h) or less on a compact spare and have the tire repaired soon."
+      ],
+      "videoQuery": "how to change a flat tire",
+      "stopIf": "There is no usable spare, the rim is bent, or the ground is soft or sloped. Call for a tow or a mobile tire service.",
+      "keywords": ["puncture", "nail", "spare", "wheel change", "blown tire"]
+    },
+    {
+      "id": "low-tire-pressure",
+      "category": "tires",
+      "name": "Tire pressure warning light",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "One or more tires is below the recommended pressure. A cold night or a slow leak is the usual cause.",
+      "tools": [
+        "Portable 12 volt tire inflator",
+        "Tire pressure gauge",
+        "The pressure sticker inside the driver's door frame"
+      ],
+      "steps": [
+        "Read the cold pressure on the sticker inside the driver's door frame.",
+        "Remove each valve cap and measure every tire.",
+        "Inflate each low tire to the pressure on the sticker.",
+        "Drive for 15 minutes, then check the pressures again.",
+        "If one tire keeps losing air, look for a nail or a damaged valve."
+      ],
+      "videoQuery": "tire pressure warning light inflate reset",
+      "stopIf": "The tire drops again within an hour. Have it patched at a tire shop.",
+      "keywords": ["tpms", "psi", "low air", "inflate", "pump"]
+    },
+    {
+      "id": "leaking-valve",
+      "category": "tires",
+      "name": "Leaking valve stem",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "15 minutes",
+      "summary": "Air is escaping at the valve, usually through a loose or worn valve core.",
+      "tools": ["Valve core tool", "Spare valve cores", "Spray bottle of soapy water", "Tire inflator"],
+      "steps": [
+        "Spray soapy water on the valve. Bubbles show where the air is escaping.",
+        "Tighten the valve core clockwise with the tool.",
+        "If it still leaks, fit a new valve core.",
+        "Inflate to the pressure on the door sticker and test again with soapy water.",
+        "Refit the valve cap."
+      ],
+      "videoQuery": "replace leaking tire valve core",
+      "stopIf": "The rubber stem is cracked or split. A tire shop has to replace it.",
+      "keywords": ["hissing", "air leak", "valve core", "slow leak"]
+    },
+    {
+      "id": "tire-bulge",
+      "category": "tires",
+      "name": "Sidewall bulge or blowout",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A bulge, or a shredded tire, means the tire's structure has failed. It can burst without warning.",
+      "tools": [
+        "Full-size spare, if you carry one",
+        "Jack and lug wrench",
+        "Warning triangles or flares",
+        "Your roadside assistance number"
+      ],
+      "steps": [
+        "Ease off the accelerator and hold the wheel straight. Avoid hard braking after a blowout.",
+        "Move fully onto the shoulder and turn on your hazard lights.",
+        "Do not drive on a bulged tire, even slowly.",
+        "Fit the spare only if you are well clear of traffic.",
+        "Otherwise call for a tow or a mobile tire service."
+      ],
+      "videoQuery": "tire blowout what to do",
+      "stopIf": "Always. A bulge or exposed cords cannot be repaired.",
+      "keywords": ["burst", "bubble", "blown out", "exposed cord", "shredded"]
+    },
+    {
+      "id": "loose-lug-nuts",
+      "category": "tires",
+      "name": "Loose or missing lug nuts",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "A click, clunk or wobble from one wheel can mean loose lug nuts, often after recent tire work.",
+      "tools": ["Lug wrench", "A spare nut, or one borrowed from the other wheels", "Flashlight"],
+      "steps": [
+        "Stop and check every wheel by hand.",
+        "Tighten each nut in a star pattern.",
+        "If a nut is missing, take one nut from each of the other wheels so that no wheel is short by more than one.",
+        "Check the nuts again after 25 miles (40 km).",
+        "Have a shop tighten them to the specified torque."
+      ],
+      "videoQuery": "tighten lug nuts star pattern",
+      "stopIf": "A stud is bent, broken or stripped. Do not drive; call for a tow.",
+      "keywords": ["wheel nuts", "wobble", "clunk", "wheel falling off", "wheel bolt"]
+    },
+    {
+      "id": "highway-shake",
+      "category": "tires",
+      "name": "Shaking at speed",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "A shudder through the steering wheel at 55 to 70 mph (90 to 110 km/h) usually means an unbalanced wheel or a rim bent by a pothole.",
+      "tools": ["Tire pressure gauge", "Flashlight"],
+      "steps": [
+        "Check the pressure in all four tires.",
+        "Look for bulges, missing balance weights or a bent rim.",
+        "Check that the lug nuts are tight.",
+        "Stay below the speed at which it shakes.",
+        "Have the wheels balanced at a tire shop."
+      ],
+      "videoQuery": "car shakes at highway speed",
+      "stopIf": "The shaking gets worse, or you hear grinding. Pull over and call for help.",
+      "keywords": ["vibration", "shudder", "steering wheel shake", "unbalanced", "wobble"]
+    },
+    {
+      "id": "dead-battery",
+      "category": "starting",
+      "name": "Dead battery",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "15 minutes",
+      "summary": "Fast clicking, or no crank at all, together with dim dash lights points to a flat battery.",
+      "tools": [
+        "Portable jump starter, or jumper cables and a second car",
+        "Safety glasses",
+        "Wire brush for corroded terminals",
+        "Work gloves"
+      ],
+      "steps": [
+        "Switch off the lights and every accessory.",
+        "With a jump pack, clamp red to the positive (+) post of the flat battery and black to bare, unpainted metal on the engine, away from the battery.",
+        "With cables, add the second car: red to both positive posts, black to the good battery's negative post, then black to bare metal on the flat car. Start the helper car first.",
+        "Switch on the jump pack, or let the helper car run for a few minutes, then start your car.",
+        "Drive for at least 30 minutes to recharge."
+      ],
+      "videoQuery": "how to jump start a car",
+      "stopIf": "The battery is swollen or leaking, or the car dies again soon after. Many parts stores test batteries for free.",
+      "keywords": ["jump start", "flat battery", "clicking", "wont crank", "no power"]
+    },
+    {
+      "id": "failing-alternator",
+      "category": "starting",
+      "name": "Battery light while driving",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "Under 30 minutes of driving",
+      "summary": "A battery light, dimming headlights or a whine means the alternator has stopped charging. The car runs on the battery until it is empty.",
+      "tools": ["Phone charger, unplugged to save power", "Jump starter, in case the car stalls"],
+      "steps": [
+        "Switch off the air conditioning, radio, seat heaters and chargers.",
+        "Keep the headlights on only if it is dark.",
+        "Drive straight to the nearest parts store or garage.",
+        "Do not switch the engine off before you arrive.",
+        "Ask for a charging system test."
+      ],
+      "videoQuery": "alternator failing symptoms battery light",
+      "stopIf": "The gauges flicker or the steering gets heavy. Pull over safely now.",
+      "keywords": ["charging", "dim lights", "red battery", "alternator", "whining"]
+    },
+    {
+      "id": "starter-click",
+      "category": "starting",
+      "name": "One click, then nothing",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A single loud click with bright dash lights means the battery is fine but the starter motor is not turning.",
+      "tools": ["Your roadside assistance number", "The owner's manual"],
+      "steps": [
+        "Check that the dash lights stay bright when you turn the key.",
+        "Try again with the gear selector in Neutral instead of Park. Some cars start in either.",
+        "If the dash lights dim a lot when you turn the key, treat it as a flat battery instead.",
+        "If it still will not turn, call for a tow."
+      ],
+      "videoQuery": "car clicks once but won't start",
+      "stopIf": "You smell burning from under the car. Stop trying and call for help.",
+      "keywords": ["starter motor", "single click", "wont crank", "bright lights"]
+    },
+    {
+      "id": "out-of-fuel",
+      "category": "starting",
+      "name": "Out of fuel",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "30 to 60 minutes",
+      "summary": "The engine cranks but will not fire, and the fuel gauge reads empty or close to it.",
+      "tools": ["Approved fuel can holding 1 to 2 gallons (4 to 8 liters), or a fuel delivery service", "Funnel"],
+      "steps": [
+        "Coast fully onto the shoulder and turn on your hazard lights.",
+        "Ask for fuel delivery through your insurer or roadside plan. Do not walk along a highway.",
+        "Add at least 1 to 2 gallons (4 to 8 liters).",
+        "Crank in bursts of no more than five seconds until fuel reaches the engine.",
+        "Fill the tank at the next station."
+      ],
+      "videoQuery": "ran out of gas what to do",
+      "stopIf": "The gauge shows fuel but the car still will not start. It may be the fuel pump; have it towed.",
+      "keywords": ["gas", "petrol", "empty tank", "ran dry", "fuel delivery"]
+    },
+    {
+      "id": "wrong-fuel",
+      "category": "starting",
+      "name": "Wrong fuel in the tank",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "Diesel in a gasoline car, or gasoline in a diesel car, can badly damage the fuel system once the engine runs.",
+      "tools": ["Your roadside assistance number"],
+      "steps": [
+        "Do not start the engine. If you have only just filled up, do not switch the ignition on either.",
+        "If you are already driving, pull over safely and switch off at once.",
+        "Move the car away from the pump only with help and only if it is safe.",
+        "Call for a tow to a garage that can drain the tank."
+      ],
+      "videoQuery": "wrong fuel in car what to do",
+      "stopIf": "Always. Running the engine can ruin the fuel pump and injectors.",
+      "keywords": ["diesel", "petrol", "gasoline", "misfuel", "wrong pump"]
+    },
+    {
+      "id": "key-fob-dead",
+      "category": "starting",
+      "name": "Key fob dead or key not detected",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "5 minutes",
+      "summary": "The buttons do nothing, or the dash says that no key is detected.",
+      "tools": ["New coin battery (most fobs use a CR2032 or CR2025)", "Small flat screwdriver or a coin"],
+      "steps": [
+        "On a push-button car, hold the fob against the start button and press the brake to start.",
+        "Use the hidden metal key inside the fob to open the door.",
+        "Pry the fob open at its seam.",
+        "Fit the new battery with the + side facing the same way as the old one.",
+        "Close the fob and test lock, unlock and start."
+      ],
+      "videoQuery": "key fob battery replacement",
+      "stopIf": "It still fails with a new battery. A dealer may need to reprogram the key.",
+      "keywords": ["remote", "smart key", "keyless", "no key detected", "button battery"]
+    },
+    {
+      "id": "check-engine-steady",
+      "category": "warnings",
+      "name": "Check engine light, steady",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "A steady light means the engine computer has logged a fault that is not urgent. A loose fuel cap is a common cause.",
+      "tools": ["OBD2 code reader, optional", "Most parts stores read codes for free"],
+      "steps": [
+        "Tighten the fuel cap until it clicks.",
+        "Check that the car drives normally, with no shaking and no loss of power.",
+        "Carry on gently to your destination.",
+        "Have the code read at a parts store or a garage.",
+        "The light can clear itself after a few drives if the fault was minor."
+      ],
+      "videoQuery": "check engine light steady what to do",
+      "stopIf": "The light starts flashing, or the car loses power. Pull over.",
+      "keywords": ["cel", "engine light", "malfunction", "fuel cap", "obd"]
+    },
+    {
+      "id": "check-engine-flashing",
+      "category": "warnings",
+      "name": "Check engine light, flashing",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A flashing light signals a serious misfire. Unburned fuel can overheat and destroy the catalytic converter.",
+      "tools": ["Your roadside assistance number", "OBD2 code reader, optional"],
+      "steps": [
+        "Ease off the accelerator and lighten the load on the engine.",
+        "Pull off at the first safe place.",
+        "Switch the engine off.",
+        "Call for a tow instead of driving on."
+      ],
+      "videoQuery": "flashing check engine light misfire",
+      "stopIf": "Always. Damage is happening while the light flashes.",
+      "keywords": ["blinking", "misfire", "cel flashing", "engine light blinking"]
+    },
+    {
+      "id": "oil-pressure-light",
+      "category": "warnings",
+      "name": "Oil pressure light",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "A red oil can light means low oil pressure, most often because the oil level is low.",
+      "tools": [
+        "1 to 2 quarts (1 to 2 liters) of oil of the grade printed on the oil filler cap",
+        "Funnel",
+        "Paper towels"
+      ],
+      "steps": [
+        "Switch the engine off right away.",
+        "Wait five minutes on level ground.",
+        "Pull the dipstick, wipe it, push it back in fully and read the level.",
+        "Add oil half a quart (half a liter) at a time, up to the full mark.",
+        "Restart. The light should go out within seconds."
+      ],
+      "videoQuery": "how to check and add engine oil",
+      "stopIf": "The light stays on with the oil full, or you hear knocking. Do not drive; call for a tow.",
+      "keywords": ["oil can", "low oil", "dipstick", "red light", "engine oil"]
+    },
+    {
+      "id": "hybrid-ev-warning",
+      "category": "warnings",
+      "name": "Hybrid or electric system warning",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A message such as check hybrid system, or a high voltage warning, means the electric drive has a fault. These systems carry dangerous voltage.",
+      "tools": ["Your roadside assistance number", "The owner's manual"],
+      "steps": [
+        "Pull over safely and put the car in Park.",
+        "Switch the car fully off for two minutes, then restart once.",
+        "If the warning comes back, do not drive.",
+        "Never touch the orange cables.",
+        "Call for a tow to a dealer that services hybrid or electric cars."
+      ],
+      "videoQuery": "check hybrid system warning what to do",
+      "stopIf": "You see smoke or smell burning from a hybrid or electric car. Get out and move well away from it.",
+      "keywords": ["high voltage", "ev", "hybrid", "electric car", "propulsion"]
+    },
+    {
+      "id": "engine-overheating",
+      "category": "engine",
+      "name": "Engine overheating",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "45 minutes",
+      "summary": "The temperature gauge is in the red, or steam is rising from the hood. Low coolant, a failed fan or a stuck thermostat is the usual cause.",
+      "tools": [
+        "Premixed 50/50 coolant of the type in your manual",
+        "1 gallon (4 liters) of water as an emergency backup",
+        "Thick rag or towel",
+        "Flashlight"
+      ],
+      "steps": [
+        "Turn the heater to full hot to draw heat away from the engine.",
+        "Pull over and switch the engine off.",
+        "Wait at least 30 minutes. Never open a hot radiator cap.",
+        "Top up the coolant reservoir to the MAX mark.",
+        "Restart and watch the gauge and the cooling fans."
+      ],
+      "videoQuery": "engine overheating what to do roadside",
+      "stopIf": "The gauge climbs again within minutes, or coolant pours out. Call for a tow.",
+      "keywords": ["hot", "steam", "temperature gauge", "boiling", "radiator"]
+    },
+    {
+      "id": "coolant-leak",
+      "category": "engine",
+      "name": "Coolant leak",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "30 minutes",
+      "summary": "A sweet, syrupy smell, or a green, orange or pink puddle under the front of the car.",
+      "tools": ["Premixed coolant", "Radiator stop-leak, as a temporary fix", "Flat screwdriver for hose clamps", "Paper towels"],
+      "steps": [
+        "Let the engine cool completely.",
+        "Look for wet spots on the hoses and clamps.",
+        "Tighten any loose hose clamp.",
+        "For a small leak, add stop-leak as the bottle directs.",
+        "Refill the coolant and check the level at every stop."
+      ],
+      "videoQuery": "find and fix coolant leak radiator hose",
+      "stopIf": "A hose has split or the radiator is cracked. A temporary fix will not last.",
+      "keywords": ["antifreeze", "puddle", "sweet smell", "green liquid", "dripping"]
+    },
+    {
+      "id": "broken-belt",
+      "category": "engine",
+      "name": "Broken drive belt",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A loud squeal or slap, then a battery light, heavy steering and a rising temperature. One belt drives the alternator, the water pump and, on many cars, power steering.",
+      "tools": ["Flashlight", "Your roadside assistance number"],
+      "steps": [
+        "Pull over before the engine overheats.",
+        "Once the engine is cool, open the hood and look for a missing or shredded belt.",
+        "Do not drive any further than a short distance to a safe spot.",
+        "Call for a tow. A garage can often fit a new belt the same day."
+      ],
+      "videoQuery": "serpentine belt broke symptoms",
+      "stopIf": "Always. Without the belt the engine overheats within minutes.",
+      "keywords": ["serpentine", "fan belt", "squeal", "snapped belt", "loose belt"]
+    },
+    {
+      "id": "exhaust-smoke",
+      "category": "engine",
+      "name": "Smoke from the exhaust or a burning smell",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "10 minutes",
+      "summary": "Blue smoke means burning oil, white smoke with a sweet smell means coolant, and black smoke means too much fuel.",
+      "tools": ["Engine oil", "Coolant", "Flashlight"],
+      "steps": [
+        "Note the color of the smoke and the smell.",
+        "Once the engine is cool, check the oil and coolant levels.",
+        "Look for oil dripping onto the exhaust.",
+        "Top up whichever is low.",
+        "Drive gently to a garage and tell them the color of the smoke."
+      ],
+      "videoQuery": "exhaust smoke color meaning",
+      "stopIf": "Thick white smoke comes with overheating, or smoke comes from under the hood. Stop and call for a tow.",
+      "keywords": ["blue smoke", "white smoke", "black smoke", "burning oil", "tailpipe"]
+    },
+    {
+      "id": "limp-mode",
+      "category": "engine",
+      "name": "Sudden loss of power",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "The car will not go above about 25 mph (40 km/h), or will not shift. The computer is limiting power to protect the engine or transmission.",
+      "tools": ["OBD2 code reader, optional"],
+      "steps": [
+        "Switch on your hazard lights and move to the edge of the road.",
+        "Leave at the next safe place and switch the car off.",
+        "Wait five minutes and restart.",
+        "Check the oil and coolant levels.",
+        "Drive slowly to a garage for a code scan."
+      ],
+      "videoQuery": "car limp mode what to do",
+      "stopIf": "It comes back at once, or the check engine light flashes. Call for a tow.",
+      "keywords": ["limp home", "reduced power", "wont accelerate", "slow", "derate"]
+    },
+    {
+      "id": "slipping-transmission",
+      "category": "engine",
+      "name": "Transmission slipping",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "15 minutes",
+      "summary": "The engine revs but the car does not speed up, or shifts are late and harsh.",
+      "tools": ["Transmission fluid of the exact type in your manual", "Funnel", "Paper towels"],
+      "steps": [
+        "Pull over and let the car cool for 20 minutes.",
+        "Check the fluid if your car has a transmission dipstick. Many newer cars do not.",
+        "Top up with the exact fluid type.",
+        "Drive gently and avoid hard acceleration.",
+        "Have a transmission shop check it."
+      ],
+      "videoQuery": "transmission slipping symptoms",
+      "stopIf": "The car will not move in Drive or Reverse. Call for a tow.",
+      "keywords": ["gearbox", "revving", "harsh shift", "delayed shift", "automatic"]
+    },
+    {
+      "id": "brake-noise",
+      "category": "brakes",
+      "name": "Squealing or grinding brakes",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "Drive to a garage",
+      "summary": "A high squeal is the wear indicator on worn pads. Grinding is metal on metal and damages the discs.",
+      "tools": ["Flashlight"],
+      "steps": [
+        "Leave extra space to the car ahead.",
+        "Brake earlier and more gently.",
+        "Look through the wheel spokes to see how much pad is left.",
+        "If it is grinding, see a garage the same day."
+      ],
+      "videoQuery": "brake noise squeal versus grinding",
+      "stopIf": "The pedal feels soft, or the car pulls hard when you brake. Stop and call for a tow.",
+      "keywords": ["squeak", "screech", "brake pads", "rotor", "disc"]
+    },
+    {
+      "id": "soft-brake-pedal",
+      "category": "brakes",
+      "name": "Soft or sinking brake pedal",
+      "verdict": "help",
+      "skill": "advanced",
+      "time": "Wait for help",
+      "summary": "A pedal that sinks toward the floor means a fluid leak or air in the lines. Stopping power is reduced.",
+      "tools": ["Flashlight", "Your roadside assistance number"],
+      "steps": [
+        "Pump the pedal and shift down to slow the car.",
+        "Use the parking brake gently if you need it.",
+        "Leave the road at the first safe place.",
+        "Look for fluid near the wheels.",
+        "Do not drive. Call for a tow."
+      ],
+      "videoQuery": "spongy brake pedal causes",
+      "stopIf": "Always. Brakes cannot be patched well enough to limp home.",
+      "keywords": ["spongy", "brake fluid", "pedal to the floor", "no brakes", "mushy"]
+    },
+    {
+      "id": "pulls-to-side",
+      "category": "brakes",
+      "name": "Car pulls to one side",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "Uneven tire pressure is the usual cause. If it pulls only when you brake, a brake caliper may be sticking.",
+      "tools": ["Tire pressure gauge", "Tire inflator"],
+      "steps": [
+        "Check all four pressures and make them match.",
+        "Look for a soft or damaged tire.",
+        "After driving, hold your hand near each wheel. A very hot one points to a sticking brake.",
+        "Ask for an alignment check at a tire shop."
+      ],
+      "videoQuery": "car pulls to one side causes",
+      "stopIf": "A wheel smokes or smells of burning. Pull over and let it cool.",
+      "keywords": ["drifts", "veers", "alignment", "sticking caliper", "steering pull"]
+    },
+    {
+      "id": "heavy-steering",
+      "category": "brakes",
+      "name": "Heavy or whining steering",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "Low power steering fluid or a failing pump makes the wheel heavy, often with a whine when turning.",
+      "tools": ["Power steering fluid of the type in your manual", "Funnel"],
+      "steps": [
+        "Check whether your car has a fluid reservoir. Electric systems do not.",
+        "Top up to the marked line.",
+        "Look under the front of the car for leaks.",
+        "Drive slowly. The steering still works, it just needs more effort."
+      ],
+      "videoQuery": "power steering heavy whining fluid",
+      "stopIf": "The steering suddenly locks or becomes very heavy at speed. Pull over.",
+      "keywords": ["power steering", "whine", "stiff wheel", "hard to turn", "groan"]
+    },
+    {
+      "id": "blown-fuse",
+      "category": "electrical",
+      "name": "Blown fuse: charger or radio dead",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "One circuit, such as the charging socket or the radio, stopped suddenly. A fuse has probably blown.",
+      "tools": [
+        "Assorted blade fuse kit",
+        "Fuse puller, often clipped inside the fuse box lid",
+        "Fuse diagram from the owner's manual",
+        "Flashlight"
+      ],
+      "steps": [
+        "Find the fuse box under the dash or under the hood.",
+        "Match the dead circuit on the diagram.",
+        "Pull the fuse. A broken metal strip means it has blown.",
+        "Fit a new fuse with the same amp rating.",
+        "Test the circuit."
+      ],
+      "videoQuery": "how to replace a blown car fuse",
+      "stopIf": "The new fuse blows at once. There is a short circuit; see a mechanic.",
+      "keywords": ["fuse box", "cigarette lighter", "12v socket", "usb charger", "no power"]
+    },
+    {
+      "id": "bulb-out",
+      "category": "electrical",
+      "name": "Headlight or brake light out",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "15 minutes",
+      "summary": "A bulb warning on the dash, or someone points it out. A dead brake light is a common reason to be stopped by the police.",
+      "tools": [
+        "Replacement bulb of the right type",
+        "Gloves (do not touch halogen glass)",
+        "Screwdriver"
+      ],
+      "steps": [
+        "Ask the parts store for the exact bulb number for your car.",
+        "Open the hood, or the trunk liner behind the light.",
+        "Twist out the bulb holder.",
+        "Fit the new bulb without touching the glass.",
+        "Test it before you close everything up."
+      ],
+      "videoQuery": "replace headlight bulb",
+      "stopIf": "It is an LED or sealed unit, which cannot be swapped at the roadside. Go to a garage.",
+      "keywords": ["lamp", "tail light", "stop light", "burnt out", "dark"]
+    },
+    {
+      "id": "wipers-dead",
+      "category": "electrical",
+      "name": "Wipers stopped working",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "Usually a blown fuse or a loose wiper arm nut. In rain this is a safety problem.",
+      "tools": ["Fuse kit", "Rain repellent for glass", "Small socket set"],
+      "steps": [
+        "Pull over and wait until the rain eases.",
+        "Check the wiper fuse.",
+        "See whether the motor runs but the arm does not move. That points to a loose nut.",
+        "Apply rain repellent to the glass.",
+        "Drive slowly and leave extra distance."
+      ],
+      "videoQuery": "windshield wipers stopped working fix",
+      "stopIf": "Heavy rain and no wipers. Stay parked until you can see clearly.",
+      "keywords": ["windscreen", "wiper motor", "rain", "visibility", "wiper arm"]
+    },
+    {
+      "id": "ac-warm",
+      "category": "climate",
+      "name": "Air conditioning blows warm",
+      "verdict": "limp",
+      "skill": "moderate",
+      "time": "20 minutes",
+      "summary": "Usually low refrigerant, a blown air conditioning fuse or a compressor clutch that will not engage.",
+      "tools": [
+        "AC recharge kit with a gauge (check your manual for the refrigerant type)",
+        "Safety glasses",
+        "Gloves"
+      ],
+      "steps": [
+        "Start the engine and set the air conditioning to maximum.",
+        "Check that the compressor clutch is turning.",
+        "Connect the gauge to the low-pressure port only.",
+        "Add refrigerant in short bursts, watching the gauge.",
+        "Stop in the green zone. Do not overfill."
+      ],
+      "videoQuery": "car ac blowing warm air recharge",
+      "stopIf": "The compressor will not engage, or the charge leaks out fast. It needs a shop.",
+      "keywords": ["ac", "a/c", "cold air", "refrigerant", "compressor"]
+    },
+    {
+      "id": "no-heat",
+      "category": "climate",
+      "name": "No heat",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "15 minutes",
+      "summary": "Cold air from the heater usually means low coolant or a stuck thermostat. In winter this is a safety matter.",
+      "tools": ["Premixed coolant", "Blanket and warm layers", "Ice scraper"],
+      "steps": [
+        "Check that the temperature gauge reaches its normal position.",
+        "Once the engine is cool, top up the coolant.",
+        "Use the defroster to keep the windshield clear.",
+        "Dress warmly and keep a blanket within reach.",
+        "Have the cooling system checked soon."
+      ],
+      "videoQuery": "car heater blowing cold air",
+      "stopIf": "The gauge stays low and the windows ice over inside. Stop somewhere warm.",
+      "keywords": ["heater", "cold cabin", "thermostat", "winter", "freezing"]
+    },
+    {
+      "id": "foggy-windshield",
+      "category": "climate",
+      "name": "Windshield will not clear",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "5 minutes",
+      "summary": "Fog stays on the glass, often because recirculation is on or the cabin filter is clogged.",
+      "tools": ["Microfiber cloth", "Anti-fog glass cleaner", "Cabin air filter, if airflow is weak"],
+      "steps": [
+        "Turn recirculation off so the car draws in fresh air.",
+        "Turn on the air conditioning with the defroster. It dries the air.",
+        "Set the temperature to warm and the fan to high.",
+        "Wipe the glass with the microfiber cloth.",
+        "Replace the cabin filter if the airflow is weak."
+      ],
+      "videoQuery": "how to defog windshield fast",
+      "stopIf": "A sweet smell with a greasy film on the glass. The heater core may be leaking; see a mechanic.",
+      "keywords": ["fogged", "misted", "defrost", "condensation", "cant see"]
+    },
+    {
+      "id": "cabin-odor",
+      "category": "climate",
+      "name": "Musty smell or weak airflow",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "10 minutes",
+      "summary": "A musty smell and weak airflow mean the cabin air filter is clogged.",
+      "tools": ["Cabin air filter for your exact vehicle", "Flashlight", "Vent odor spray, optional"],
+      "steps": [
+        "Empty the glove box.",
+        "Release the stops so the glove box swings down.",
+        "Slide out the filter door and the old filter.",
+        "Fit the new filter with its airflow arrow matching the one on the housing.",
+        "Refit everything and run the fan on high."
+      ],
+      "videoQuery": "cabin air filter replacement",
+      "stopIf": "The smell stays after a new filter. The evaporator may need a professional clean.",
+      "keywords": ["mold", "damp", "stale air", "vent smell", "pollen filter"]
+    },
+    {
+      "id": "stuck-snow-mud",
+      "category": "weather",
+      "name": "Stuck in snow or mud",
+      "verdict": "fix",
+      "skill": "beginner",
+      "time": "20 minutes",
+      "summary": "The wheels spin and the car does not move. Common on snowy shoulders and soft verges.",
+      "tools": ["Small shovel", "Cat litter, sand or floor mats for grip", "Gloves"],
+      "steps": [
+        "Switch off traction control with the button on the dash.",
+        "Clear snow or mud from around the driven wheels.",
+        "Put litter, sand or a floor mat in front of the tires.",
+        "Accelerate gently and rock between Drive and Reverse.",
+        "If you wait with the engine running, keep the exhaust pipe clear and open a window slightly."
+      ],
+      "videoQuery": "how to get a car unstuck from snow",
+      "stopIf": "The car is near a ditch, or you are blocking traffic. Call for a tow.",
+      "keywords": ["ice", "spinning wheels", "ditch", "verge", "bogged"]
+    },
+    {
+      "id": "locked-out",
+      "category": "weather",
+      "name": "Keys locked in the car",
+      "verdict": "help",
+      "skill": "beginner",
+      "time": "30 to 60 minutes",
+      "summary": "The keys are inside and the doors are locked.",
+      "tools": ["Roadside assistance or a locksmith", "Your car brand's phone app, if it can unlock remotely"],
+      "steps": [
+        "Check every door and the trunk release.",
+        "Try your car brand's phone app to unlock.",
+        "Call roadside assistance. Lockouts are often covered.",
+        "If a child or a pet is inside, or it is hot, call your local emergency number right away."
+      ],
+      "videoQuery": "locked keys in car what to do",
+      "stopIf": "Do not use a wire hanger on a modern car. It can damage airbag wiring and door electronics.",
+      "keywords": ["lockout", "keys inside", "locksmith", "locked doors", "child inside"]
+    },
+    {
+      "id": "animal-strike",
+      "category": "weather",
+      "name": "Hit an animal",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "20 minutes",
+      "summary": "Animal strikes are common at dawn and dusk on rural roads.",
+      "tools": ["Phone camera", "Flashlight", "Your insurance details"],
+      "steps": [
+        "Pull over with your hazard lights on and keep away from the animal.",
+        "Call the police if the animal is blocking the road or the damage is serious.",
+        "Check for leaks, broken lights and a damaged radiator.",
+        "Take photos for your insurer.",
+        "Drive on only if the lights work and nothing is leaking."
+      ],
+      "videoQuery": "what to do after hitting a deer",
+      "stopIf": "Fluid is leaking, a headlight is out at night, or the hood will not latch. Call for a tow.",
+      "keywords": ["deer", "collision", "wildlife", "dented", "insurance"]
+    },
+    {
+      "id": "minor-crash",
+      "category": "weather",
+      "name": "Minor accident, no injuries",
+      "verdict": "limp",
+      "skill": "beginner",
+      "time": "30 minutes",
+      "summary": "A fender bender where everyone is unhurt and the cars can still move.",
+      "tools": [
+        "Phone camera",
+        "Driver's license, registration and insurance details",
+        "Pen and paper"
+      ],
+      "steps": [
+        "Check that everyone is unhurt. Call your local emergency number if anyone is not.",
+        "Move the cars out of the traffic lanes if they can be driven.",
+        "Swap names, phone numbers, insurance details and plate numbers.",
+        "Photograph both cars, the scene and the other driver's documents.",
+        "Call your insurer from the scene."
+      ],
+      "videoQuery": "what to do after a minor car accident",
+      "stopIf": "Anyone is hurt, an airbag went off, or fluid is leaking. Call your local emergency number.",
+      "keywords": ["fender bender", "collision", "crash", "insurance", "dent"]
+    }
+  ],
+  "triage": [
+    {
+      "id": "dash-light",
+      "label": "A warning light came on",
+      "question": "Which light is it?",
+      "options": [
+        { "label": "Check engine, steady", "problemIds": ["check-engine-steady"] },
+        { "label": "Check engine, flashing", "problemIds": ["check-engine-flashing"] },
+        { "label": "Red oil can", "problemIds": ["oil-pressure-light"] },
+        { "label": "Thermometer or temperature", "problemIds": ["engine-overheating", "coolant-leak"] },
+        { "label": "Red battery", "problemIds": ["failing-alternator", "broken-belt"] },
+        { "label": "Tire with an exclamation mark", "problemIds": ["low-tire-pressure", "flat-tire"] },
+        { "label": "Brake warning", "problemIds": ["soft-brake-pedal", "brake-noise"] },
+        { "label": "Hybrid or electric warning", "problemIds": ["hybrid-ev-warning"] }
+      ]
+    },
+    {
+      "id": "wont-start",
+      "label": "The car will not start",
+      "question": "What happens when you turn the key or press start?",
+      "options": [
+        { "label": "Rapid clicking and dim lights", "problemIds": ["dead-battery"] },
+        { "label": "Nothing at all, no lights", "problemIds": ["dead-battery", "key-fob-dead"] },
+        { "label": "One loud click and bright lights", "problemIds": ["starter-click", "dead-battery"] },
+        { "label": "It cranks but will not start", "problemIds": ["out-of-fuel", "wrong-fuel"] },
+        { "label": "The dash says no key detected", "problemIds": ["key-fob-dead"] }
+      ]
+    },
+    {
+      "id": "noise",
+      "label": "A strange noise",
+      "question": "What does it sound like?",
+      "options": [
+        { "label": "Squeal or grinding when braking", "problemIds": ["brake-noise"] },
+        { "label": "Loud squeal from the engine", "problemIds": ["broken-belt", "failing-alternator"] },
+        { "label": "Thumping from a wheel", "problemIds": ["flat-tire", "loose-lug-nuts"] },
+        { "label": "Clicking or wobble from a wheel", "problemIds": ["loose-lug-nuts", "highway-shake"] },
+        { "label": "Whine when turning the wheel", "problemIds": ["heavy-steering"] }
+      ]
+    },
+    {
+      "id": "smell",
+      "label": "A strange smell",
+      "question": "What does it smell like?",
+      "options": [
+        { "label": "Sweet, like syrup", "problemIds": ["coolant-leak", "engine-overheating"] },
+        { "label": "Burning oil", "problemIds": ["exhaust-smoke"] },
+        { "label": "Burning rubber", "problemIds": ["broken-belt", "pulls-to-side"] },
+        { "label": "Musty or damp", "problemIds": ["cabin-odor"] }
+      ]
+    },
+    {
+      "id": "smoke",
+      "label": "Smoke or steam",
+      "question": "Where is it coming from?",
+      "options": [
+        { "label": "Steam from under the hood", "problemIds": ["engine-overheating", "coolant-leak"] },
+        { "label": "Blue or black smoke from the exhaust", "problemIds": ["exhaust-smoke"] },
+        { "label": "Thick white smoke from the exhaust", "problemIds": ["exhaust-smoke", "engine-overheating"] },
+        { "label": "Smoke from a wheel", "problemIds": ["pulls-to-side", "brake-noise"] }
+      ]
+    },
+    {
+      "id": "drives-oddly",
+      "label": "It drives strangely",
+      "question": "What do you feel?",
+      "options": [
+        { "label": "Shaking at speed", "problemIds": ["highway-shake", "loose-lug-nuts"] },
+        { "label": "It pulls to one side", "problemIds": ["pulls-to-side", "low-tire-pressure"] },
+        { "label": "Low power, will not speed up", "problemIds": ["limp-mode", "slipping-transmission"] },
+        { "label": "The engine revs but the car does not speed up", "problemIds": ["slipping-transmission"] },
+        { "label": "The brake pedal feels soft", "problemIds": ["soft-brake-pedal"] },
+        { "label": "The steering is heavy", "problemIds": ["heavy-steering", "broken-belt"] }
+      ]
+    },
+    {
+      "id": "tire-looks",
+      "label": "A tire looks wrong",
+      "question": "What do you see?",
+      "options": [
+        { "label": "Flat or very low", "problemIds": ["flat-tire"] },
+        { "label": "A bulge on the side", "problemIds": ["tire-bulge"] },
+        { "label": "Hissing at the valve", "problemIds": ["leaking-valve"] },
+        { "label": "It looks fine but the light is on", "problemIds": ["low-tire-pressure"] }
+      ]
+    },
+    {
+      "id": "road-weather",
+      "label": "Road or weather trouble",
+      "question": "What happened?",
+      "options": [
+        { "label": "Stuck in snow or mud", "problemIds": ["stuck-snow-mud"] },
+        { "label": "Keys locked inside", "problemIds": ["locked-out"] },
+        { "label": "Hit an animal", "problemIds": ["animal-strike"] },
+        { "label": "Minor accident", "problemIds": ["minor-crash"] },
+        { "label": "Cannot see clearly: fog or wipers", "problemIds": ["foggy-windshield", "wipers-dead"] },
+        { "label": "No heat", "problemIds": ["no-heat"] }
+      ]
+    }
+  ]
+}

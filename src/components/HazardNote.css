@@ -1,0 +1,17 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.hazard-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--rule-hair) solid var(--color-signal-edge);
+  border-radius: var(--radius-control);
+  background: var(--color-signal-tint);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.hazard-note > svg {
+  margin-block-start: var(--space-3xs);
+  color: var(--color-signal-edge);
+}

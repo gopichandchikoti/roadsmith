@@ -1,0 +1,30 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.verdict-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-3xs) var(--space-sm);
+  border: var(--rule-hair) solid;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.verdict-badge[data-verdict="fix"] {
+  border-color: var(--color-violet);
+  background: var(--color-violet-tint);
+  color: var(--color-ink);
+}
+
+.verdict-badge[data-verdict="limp"] {
+  border-color: var(--color-signal-edge);
+  background: var(--color-signal-tint);
+  color: var(--color-ink);
+}
+
+.verdict-badge[data-verdict="help"] {
+  border-color: var(--color-accent-ink);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}

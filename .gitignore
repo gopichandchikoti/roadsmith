@@ -1,0 +1,45 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Dependencies and build output
+node_modules
+/dist/
+/dist-server/
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.sw?
+
+# Environment and local state
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.db
+*.keystore
+*.jks
+
+# Scratch output, local tool config and security-scan results never belong in the repository
+.tmp-*
+.mcp.json
+strix_runs/
+.hallmark/
+
+# Local-only maintainer records, including case and separator variants.
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][ _-][Ll][Oo][Gg]
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][ _-][Ll][Oo][Gg][._ -]*
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][ _-][Ll][Oo][Gg][Ss]
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][ _-][Ll][Oo][Gg][Ss][._ -]*
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][Ll][Oo][Gg]
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][Ll][Oo][Gg][._ -]*
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][Ll][Oo][Gg][Ss]
+[Ff][Ee][Aa][Tt][Uu][Rr][Ee][Ll][Oo][Gg][Ss][._ -]*

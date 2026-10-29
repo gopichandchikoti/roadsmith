@@ -1,0 +1,65 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.diagnose {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.diagnose__step {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.diagnose__list {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.likely {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  border-radius: var(--radius-panel);
+  background: var(--color-paper-2);
+}
+
+.likely__name {
+  font-size: var(--text-2xl);
+}
+
+.likely > p {
+  color: var(--color-ink-2);
+  max-inline-size: 60ch;
+}
+
+.likely__verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.likely__note {
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+}
+
+.diagnose__also {
+  display: grid;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-md);
+}
+
+.diagnose__also-title {
+  font-size: var(--text-lg);
+}
+
+.diagnose__disclaimer {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  max-inline-size: 60ch;
+}

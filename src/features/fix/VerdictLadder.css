@@ -1,0 +1,102 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.ladder {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.ladder__heading {
+  font-size: var(--text-lg);
+}
+
+.ladder__list {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ladder__row {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-panel);
+  color: var(--color-muted);
+}
+
+.ladder__row[data-current="true"] {
+  color: var(--color-ink);
+}
+
+.ladder__row[data-current="true"][data-verdict="fix"] {
+  border-color: var(--color-violet);
+  background: var(--color-violet-tint);
+}
+
+.ladder__row[data-current="true"][data-verdict="limp"] {
+  border-color: var(--color-signal-edge);
+  background: var(--color-signal-tint);
+}
+
+.ladder__row[data-current="true"][data-verdict="help"] {
+  border-color: var(--color-accent-ink);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.ladder__marks {
+  display: flex;
+  gap: var(--space-3xs);
+}
+
+.ladder__mark {
+  inline-size: 0.5rem;
+  block-size: 1.5rem;
+  border: var(--rule-hair) solid currentcolor;
+  border-radius: var(--space-3xs);
+}
+
+.ladder__mark[data-filled="true"] {
+  background: currentcolor;
+}
+
+.ladder__text {
+  display: grid;
+  min-inline-size: 0;
+}
+
+.ladder__label {
+  font-size: var(--text-lg);
+  font-stretch: 85%;
+  font-weight: 800;
+  line-height: 1.2;
+  word-spacing: var(--word-gap-display);
+}
+
+.ladder__note {
+  font-size: var(--text-sm);
+}
+
+.ladder__tag {
+  grid-column: 3;
+  justify-self: start;
+  padding: var(--space-3xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+@media (min-width: 36rem) {
+  .ladder__row {
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+  }
+
+  .ladder__tag {
+    grid-column: auto;
+  }
+}

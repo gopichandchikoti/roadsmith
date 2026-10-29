@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="%LOCALE%">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>%DOCUMENT_TITLE%</title>
+    <meta name="description" content="%DOCUMENT_DESCRIPTION%" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#130F21" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F7F4FC" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript><p class="noscript">%DOCUMENT_NOSCRIPT%</p></noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.state-panel {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  border-radius: var(--radius-panel);
+  background: var(--color-paper-2);
+}
+
+.state-panel[data-tone="error"] {
+  border-color: var(--color-signal-edge);
+  background: var(--color-signal-tint);
+}
+
+.state-panel > svg {
+  color: var(--color-signal-edge);
+}
+
+.state-panel__text {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.state-panel__title {
+  font-size: var(--text-xl);
+}
+
+.state-panel__text > p {
+  color: var(--color-ink-2);
+  max-inline-size: 60ch;
+}

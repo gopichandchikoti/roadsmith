@@ -1,0 +1,110 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.fix {
+  display: grid;
+  gap: var(--space-lg);
+  max-inline-size: var(--column);
+  margin-inline: auto;
+}
+
+.fix__head {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.fix__vehicle {
+  color: var(--color-violet);
+  font-weight: 700;
+}
+
+.fix__summary {
+  max-inline-size: 60ch;
+  color: var(--color-ink-2);
+  font-size: var(--text-lg);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  margin: 0;
+}
+
+.facts__item {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.facts__item dt {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.facts__item dd {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin: 0;
+  font-weight: 700;
+}
+
+.fix__columns > .fix__area {
+  margin-block-end: var(--space-md);
+}
+
+.fix__restart {
+  display: flex;
+}
+
+/* Shared by every panel on the result screen. A panel is one box: nothing inside it is boxed again. */
+.panel {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-panel);
+  background: var(--color-paper-2);
+}
+
+.panel__title {
+  font-size: var(--text-xl);
+}
+
+.panel > p {
+  max-inline-size: 60ch;
+  color: var(--color-ink-2);
+}
+
+.panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.panel__list {
+  display: grid;
+  gap: var(--space-xs);
+  padding-inline-start: var(--space-lg);
+  color: var(--color-ink-2);
+}
+
+/* On a wide screen the six panels flow into two balanced columns, in reading order. */
+@media (min-width: 64rem) {
+  .fix {
+    max-inline-size: none;
+  }
+
+  .fix__head,
+  .fix > .ladder,
+  .fix > .help-banner {
+    max-inline-size: var(--column);
+  }
+
+  .fix__columns {
+    columns: 2;
+    column-gap: var(--space-lg);
+  }
+
+  .fix__columns > .fix__area {
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,162 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+/* Shared controls: buttons, text fields, the category select and the back link. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  min-block-size: var(--control-height);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--rule-hair) solid transparent;
+  border-radius: var(--radius-control);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.button--primary:hover {
+  background: color-mix(in oklab, var(--color-accent) 86%, var(--color-accent-ink));
+}
+
+.button--primary:active {
+  background: color-mix(in oklab, var(--color-accent) 70%, var(--color-accent-ink));
+}
+
+.button--quiet {
+  background: var(--color-paper-2);
+  border-color: var(--color-rule-strong);
+  color: var(--color-ink);
+}
+
+.button--quiet:hover {
+  background: var(--color-paper-3);
+}
+
+.button--quiet:active {
+  border-color: var(--color-violet);
+  background: var(--color-paper-3);
+}
+
+.button:disabled {
+  border-color: var(--color-rule);
+  background: var(--color-paper-3);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.field {
+  display: block;
+  min-inline-size: 0;
+}
+
+.field__label {
+  display: block;
+  margin-block-end: var(--space-xs);
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.field__control,
+.select {
+  position: relative;
+}
+
+.field__input,
+.select__input {
+  display: block;
+  inline-size: 100%;
+  min-block-size: var(--control-height);
+  padding: var(--space-xs) var(--space-xl) var(--space-xs) var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  border-radius: var(--radius-control);
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  font-size: var(--text-md);
+}
+
+.field__input--with-icon {
+  padding-inline-start: var(--space-xl);
+}
+
+.field__input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+.field__input::-webkit-search-cancel-button,
+.field__input::-webkit-search-decoration {
+  appearance: none;
+}
+
+.field__icon {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--space-sm);
+  display: flex;
+  align-items: center;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.field__clear {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  display: grid;
+  place-items: center;
+  inline-size: var(--control-height);
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-ink-2);
+  cursor: pointer;
+}
+
+.field__hint {
+  margin-block-start: var(--space-xs);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.select__input {
+  appearance: none;
+  cursor: pointer;
+}
+
+.select__icon {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: var(--space-md);
+  display: flex;
+  align-items: center;
+  color: var(--color-violet);
+  pointer-events: none;
+}
+
+.select__icon > svg {
+  transform: rotate(90deg);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-block-size: var(--control-height);
+  color: var(--color-violet);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

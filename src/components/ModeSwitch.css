@@ -1,0 +1,51 @@
+/* Hallmark · shape: app screen · theme: custom · the full stamp and the tokens are in src/themes/tokens.css */
+.mode-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: var(--space-2xs);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  border-radius: var(--radius-panel);
+  background: var(--color-paper-2);
+}
+
+/*
+ * The highlight is one element that slides between the two items on the snappy spring. Only transform moves. It is a tint
+ * with an edge, not a solid fill, and the label keeps the same ink in every state, so the text is readable whether or not the
+ * highlight has painted and in forced-colour modes.
+ */
+.mode-switch__thumb {
+  position: absolute;
+  inset-block: var(--space-2xs);
+  inset-inline-start: var(--space-2xs);
+  inline-size: calc((100% - 2 * var(--space-2xs)) / 2);
+  border: var(--rule-hair) solid var(--color-violet);
+  border-radius: var(--radius-control);
+  background: var(--color-violet-tint);
+  transition: transform var(--spring-snappy-time) var(--spring-snappy);
+}
+
+.mode-switch[data-active="diagnose"] .mode-switch__thumb {
+  transform: translateX(100%);
+}
+
+.mode-switch:dir(rtl)[data-active="diagnose"] .mode-switch__thumb {
+  transform: translateX(-100%);
+}
+
+.mode-switch__item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-block-size: var(--control-height);
+  padding: var(--space-xs);
+  border-radius: var(--radius-control);
+  color: var(--color-ink);
+  font-stretch: 86%;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
