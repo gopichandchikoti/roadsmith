@@ -10,6 +10,7 @@ It is a web app that works from a phone to a wide desktop screen. It is two colo
 black page with a yellow band, and the day theme is a yellow page with a black band.
 There are no accounts, no database, no uploads and no analytics. The driver's vehicle text, theme and checklist ticks stay in
 their own browser, and the Help page's summary is never stored or sent.
+**Live demo:** https://roadsmith.vercel.app
 
 ## Run it
 
